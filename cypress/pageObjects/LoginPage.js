@@ -8,7 +8,7 @@ export class LoginPage {
   login(email, password) {
     cy.get('#identification').type(email)
     cy.get('#password').type(password)
-    cy.get('#ember5').click()
+    cy.get("[data-test-button='sign-in']").click()
     return new DashboardPage()
   }
 }
