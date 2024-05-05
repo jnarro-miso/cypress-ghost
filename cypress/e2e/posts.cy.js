@@ -1,13 +1,14 @@
-import { DashboardPage } from '../pageObjects/DashboardPage'
+import { LoginPage } from '../pageObjects/LoginPage'
 
 // Feature: Posts
 describe('Posts feature', () => {
-  const dashboardPage = new DashboardPage()
+  const loginPage = new LoginPage()
+  let dashboardPage
 
   // Given a user is logged in to the Ghost admin
   beforeEach(() => {
-    dashboardPage.visit()
-    cy.login(Cypress.env('USERNAME'), Cypress.env('PASSWORD'))
+    loginPage.visit()
+    dashboardPage = loginPage.login(Cypress.env('USERNAME'), Cypress.env('PASSWORD'))
   })
 
   Cypress.on('uncaught:exception', (err, runnable) => {
