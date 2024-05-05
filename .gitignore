@@ -1,4 +1,9 @@
 node_modules
 
+# Cypress
 cypress/videos/
 cypress/screenshots/
+
+# Kraken
+reports/
+.kraken/
