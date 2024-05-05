@@ -6,7 +6,7 @@ export class DashboardPage {
   }
 
   goToPosts() {
-    cy.get('#ember19').contains('Posts').click();
+    cy.get("[data-test-nav='posts']").contains('Posts').click();
     return new PostPage();
   }
 }
