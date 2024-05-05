@@ -14,5 +14,8 @@
     "android-platform-tools": "^3.0.2",
     "cypress": "^13.8.1",
     "kraken-node": "^1.0.24"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^8.4.1"
   }
 }

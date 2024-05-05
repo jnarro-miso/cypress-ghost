@@ -1,4 +1,5 @@
 import { LoginPage } from '../pageObjects/LoginPage'
+import { faker } from '@faker-js/faker';
 
 // Feature: Posts
 describe('Posts feature', () => {
@@ -16,14 +17,26 @@ describe('Posts feature', () => {
     return false
   })
 
-  // Scenario: Creating a post and adding a tag
-  it('should create a post and be visible', () => {
-    const postPage = dashboardPage.goToPosts()
-    postPage.createPost('First post', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
-
+  // Scenario: Creating a post and a draft
+  it('should create a post, and a draft', () => {
+    const newPost = { title: faker.lorem.words(), content: faker.lorem.paragraph() }
+    const newDraft = { title: faker.lorem.words(), content: faker.lorem.paragraph() }
+    
     // When the user creates a post
-    // cy.createPost()
+    const postPage = dashboardPage.goToPosts()
+    postPage.createPost(newPost.title, newPost.content)
+    postPage.goToPosts()
+    // And creates a draft
+    postPage.createDraft(newDraft.title, newDraft.content)
+    
+    // Then the post should be visible on the posts page as published
+    postPage.goToPosts()
+    postPage.checkPublishedPostExists(newPost.title)
+    // And the draft should be visible on the posts page as a draft
+    postPage.checkDraftPostExists(newDraft.title)
+  })
 
+  // it('should create a post, add it a tag, and be visible', () => {
     // And adds a tag to the post
     // cy.addTagToPost()
     
@@ -32,6 +45,6 @@ describe('Posts feature', () => {
     
     // And the published post should have the assigned tag
     // ...
-  })
+  // })
 
 })
