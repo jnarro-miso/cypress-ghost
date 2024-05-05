@@ -12,10 +12,13 @@
   "license": "ISC",
   "dependencies": {
     "android-platform-tools": "^3.0.2",
-    "cypress": "^13.8.1",
-    "kraken-node": "^1.0.24"
+    "appium": "^2.5.4",
+    "cypress": "^13.8.1"
   },
   "devDependencies": {
-    "@faker-js/faker": "^8.4.1"
+    "@faker-js/faker": "^8.4.1",
+    "faker": "^5.5.3",
+    "kraken-node": "^1.0.24",
+    "selenium-webdriver": "^4.20.0"
   }
 }
