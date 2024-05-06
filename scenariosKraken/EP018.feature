@@ -6,8 +6,5 @@ Scenario: EP08 - Filtrar suscriptores
   When I enter username "<USERNAME>"
   And I enter password "<PASSWORD>"
   And I click Sign in
-  And I click on Members
-  And I wait for 1 seconds
-  And I complete the filter
   Then I filter the subscriptors
   And I wait for 2 seconds
