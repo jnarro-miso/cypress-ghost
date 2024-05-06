@@ -1,7 +1,8 @@
 export class PostPage {
   sortByRecentlyUpdated() {
+    cy.get('.gh-list-loadingcell').should('not.exist')
     cy.get("[data-test-order-select]").click()
-    cy.get("[data-option-index='2']").click()
+    cy.get("[data-option-index='2']").should('be.visible').click()
   }
 
   findPostById(id) {
@@ -63,12 +64,24 @@ export class PostPage {
     cy.get("[data-test-link='posts']").click()
   }
 
+  deletePost() {
+    cy.get("[data-test-button='delete-post']").click()
+    cy.get('.epm-modal').should('be.visible')
+    cy.get("[data-test-button='delete-post-confirm']").click()
+    cy.contains('All posts').should('be.visible')
+  }
+
   goToEditor() {
     cy.get("[data-test-button='close-publish-flow']").click()
   }
 
   toggleSettings() {
     cy.get("button.settings-menu-toggle").click()
+  }
+
+  publishPost() {
+    cy.get("[data-test-button='publish-save']:visible").click()
+    cy.contains('Updated').should('be.visible')
   }
 
   selectTag(tagName) {
