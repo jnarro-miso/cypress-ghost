@@ -1,8 +1,18 @@
 # Ghost e2e
 
-Entorno:
-- Node v18.18.1
+## Team
+
+| Nombre | Correo electrónico |
+| --- | ---|
+| Andrea Villamizar | af.villamizarr1@uniandes.edu.co |
+| Angello Villegas | a.villegasc2@uniandes.edu.co |
+| Nelson Leonel Fonseca | n.fonsecao@uniandes.edu.co |
+| Zamir Narro | j.narro@uniandes.edu.co |
+
+## Entorno:
+- Node v18.20.0
 - Cypress 13.8.1
+- Ghost 5.82.8
 
 ## Instalación
 
