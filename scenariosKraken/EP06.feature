@@ -2,7 +2,7 @@ Feature: Semana 5
 
 @user1 @web
   Scenario: EP06 - Creación de suscriptores desde el portal administrativo
-  Given I navigate to page "http://localhost:2368/ghost"
+  Given I navigate to page "https://ghost-rpq7.onrender.com/ghost"
   When I enter username "<USERNAME>"
   And I enter password "<PASSWORD>"
   And I click Sign in

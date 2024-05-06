@@ -164,7 +164,7 @@ When('I save the change', async function () {
 Then('I see the dashboard', async function () {
   this.driver.getUrl().then((url) => {
     console.log('URL:', url);
-    assert.strictEqual(url, 'http://localhost:2368/ghost/#/dashboard');
+    assert.strictEqual(url, 'https://ghost-rpq7.onrender.com/ghost/#/dashboard');
   })
 });
 Then('I access to the view site', async function () {
