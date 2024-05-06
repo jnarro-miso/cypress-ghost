@@ -17,3 +17,5 @@ Entorno:
 - Tests de Kraken
 
 `npm run test:kraken`
+
+- Probar en el ghost https://ghost-rpq7.onrender.com/
