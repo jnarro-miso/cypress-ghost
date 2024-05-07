@@ -10,9 +10,10 @@
 | Zamir Narro | j.narro@uniandes.edu.co |
 
 ## Entorno:
-- Node v18.20.0
+- Node v16.20.2
 - Cypress 13.8.1
-- Ghost 5.82.8
+- Ghost 5.82.8 desplegado en https://ghost-rpq7.onrender.com/
+- Ghost 3.42.0 por desplegar
 
 ## Instalación
 
@@ -27,5 +28,3 @@
 - Tests de Kraken
 
 `npm run test:kraken`
-
-- Probar en el ghost https://ghost-rpq7.onrender.com/

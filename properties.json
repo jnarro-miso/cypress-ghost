@@ -1,5 +1,6 @@
 {
-  "GHOST_ADMIN_URL": "https://ghost-rpq7.onrender.com/",
+  "GHOST_ADMIN_URL": "https://ghost-rpq7.onrender.com/ghost/",
+  "OLD_GHOST_ADMIN_URL": "",
   "USERNAME": "darth@vader.com",
   "PASSWORD": "yosoytupadre"
 }
