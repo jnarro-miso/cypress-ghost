@@ -12,7 +12,7 @@
 ## Entorno:
 - Node v16.20.2
 - Cypress 13.8.1
-- Ghost 5.82.8 desplegado en https://ghost-rpq7.onrender.com/
+- Ghost 5.82.6 desplegado en https://ghost-rpq7.onrender.com/
 - Ghost 3.42.0 por desplegar
 
 ## Instalación
