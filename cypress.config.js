@@ -7,7 +7,9 @@ module.exports = {
   video: true,
   env: {
     GHOST_SITE_URL: 'https://ghost-rpq7.onrender.com/',
+    // GHOST_SITE_URL: 'http://localhost:2368/',
     GHOST_ADMIN_URL: 'https://ghost-rpq7.onrender.com/ghost/',
+    // GHOST_ADMIN_URL: 'http://localhost:2368/ghost/',
     USERNAME: "darth@vader.com",
     PASSWORD: "yosoytupadre"
   }
