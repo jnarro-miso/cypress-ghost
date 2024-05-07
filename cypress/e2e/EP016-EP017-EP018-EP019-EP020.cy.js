@@ -1,10 +1,10 @@
 import { LoginPage } from '../pageObjects/LoginPage';
-const faker = require('faker');
+import { faker } from '@faker-js/faker';
 
 
 describe('Escenarios de 06 a 10.', function() {
   const loginPage = new LoginPage()
-  const name = faker.name.findName();
+  const name = faker.person.firstName();
   const email = faker.internet.email();
   const edicion = faker.lorem.paragraph();
 

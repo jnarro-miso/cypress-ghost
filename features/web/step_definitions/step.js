@@ -1,8 +1,8 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
 const assert = require('assert');
-const faker = require('faker');
+const { faker } = require('@faker-js/faker');
 
-const name = faker.name.findName();
+const name = faker.person.firstName();
 const email = faker.internet.email();
 let member;
 const edicion = faker.lorem.paragraph();
@@ -20,6 +20,13 @@ When('I enter password {kraken-string}', async function (password) {
 When('I click Sign in', async function () {
   let element = await this.driver.$("[data-test-button='sign-in']");
   return await element.click();
+});
+
+Then('I see the dashboard {kraken-string}', async function (site) {
+  this.driver.getUrl().then((url) => {
+    console.log('URL:', url);
+    assert.strictEqual(url, site + '#/dashboard');
+  })
 });
 
 //Dar click en Miembros para verlos listados
@@ -161,12 +168,6 @@ When('I save the change', async function () {
 
 });
 
-Then('I see the dashboard', async function () {
-  this.driver.getUrl().then((url) => {
-    console.log('URL:', url);
-    assert.strictEqual(url, 'https://ghost-rpq7.onrender.com/ghost/#/dashboard');
-  })
-});
 Then('I access to the view site', async function () {
   await this.driver.$('#done-button-container').click();
   
