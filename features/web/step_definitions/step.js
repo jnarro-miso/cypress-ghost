@@ -29,6 +29,22 @@ Then('I see the dashboard {kraken-string}', async function (site) {
   })
 });
 
+// Select button by its inner text and click on it
+When('I click on {string}', async function (innerText) {
+  const element = await this.driver.$(`//*/*[text() = '${innerText}']`);
+  return await element.click();
+});
+
+When('I set page title to {string}', async function (title) {
+  const element = await this.driver.$('[data-test-editor-title-input]');
+  return await element.setValue(title)
+})
+
+When('I set page content to {string}', async function (content) {
+  const element = await this.driver.$('.kg-prose');
+  return await element.setValue(content)
+})
+
 //Dar click en Miembros para verlos listados
 When('I click on Members', async function () {
   const element = await this.driver.$('[data-test-nav="members"]');
@@ -168,6 +184,17 @@ When('I save the change', async function () {
 
 });
 
+When('I delete page', async function() {
+  const options = await this.driver.$('[data-test-psm-trigger]');
+  await options.click();
+  const deleteButton = await this.driver.$('[data-test-button="delete-post"]')
+  await deleteButton.scrollIntoView();
+  await deleteButton.click();
+  const confirmDeleteButton = await this.driver.$('[data-test-button="delete-post-confirm"]');
+  await confirmDeleteButton.click();
+});
+
+
 Then('I access to the view site', async function () {
   await this.driver.$('#done-button-container').click();
   
@@ -257,4 +284,24 @@ Then('I should see the tag {kraken-string}', async function(tagName) {
    if (texto !== tagName) {
       throw new Error(`Expected title "${tagName}" but found "${texto}"`);
    }
+});
+Then('I see page {string}', async function (pageTitle) {
+  const element = await this.driver.$(`//div[@role="menuitem"]/*/*/h3[text() = '${pageTitle}']`);
+  if (element === undefined) {
+    throw new Error(`There's no page with title ${pageTitle}`);
+  }
+});
+
+Then('I see text {string} on the page', async function (text) {
+  const element = await this.driver.$(`//*/*/*[text() = '${text}']`);
+  if (element === undefined) {
+    throw new Error(`There's no page with title ${pageTitle}`);
+  }
+});
+
+Then('I dont see {string} on the page', async function(text) {
+  const element = await this.driver.$(`//*/*/*[text() = '${text}']`);
+  if (element === undefined) {
+    throw new Error(`There's no page with title ${pageTitle}`);
+  }
 });
