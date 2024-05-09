@@ -285,6 +285,7 @@ Then('I should see the tag {kraken-string}', async function(tagName) {
       throw new Error(`Expected title "${tagName}" but found "${texto}"`);
    }
 });
+
 Then('I see page {string}', async function (pageTitle) {
   const element = await this.driver.$(`//div[@role="menuitem"]/*/*/h3[text() = '${pageTitle}']`);
   if (element === undefined) {
@@ -304,4 +305,154 @@ Then('I dont see {string} on the page', async function(text) {
   if (element === undefined) {
     throw new Error(`There's no page with title ${pageTitle}`);
   }
+});
+
+// Para funcionalidad de posts
+When('I click on Posts', async function() {
+  let element = await this.driver.$('[data-test-nav="posts"]');
+  return await element.click();
+});
+
+When('I go back to Posts', async function() {
+  let element = await this.driver.$('[data-test-link="posts"]');
+  return await element.click();
+});
+
+When('I click on New Post', async function() {
+  let element = await this.driver.$("[data-test-nav='new-story']");
+  return await element.click();
+});
+
+When('I enter post title {kraken-string}', async function (postTitle) {
+  let element = await this.driver.$('[data-test-editor-title-input]');
+  return await element.setValue(postTitle);
+});
+
+When('I click outside', async function() {
+  let element = await this.driver.$('.gh-main');
+  return await element.click();
+})
+
+When('I click on Publish', async function() {
+  let element = await this.driver.$('[data-test-button="publish-flow"]');
+  await element.click();
+  let element2 = await this.driver.$('[data-test-button="continue"]');
+  await element2.click();
+  let element3 = await this.driver.$('[data-test-button="confirm-publish"]');
+  return await element3.click();
+});
+
+When('I click on Update', async function() {
+  let element = await this.driver.$('[data-test-button="publish-save"]');
+  return await element.click();
+});
+
+Then('I should see {kraken-string}', async function (postTitle) {
+  let element = await this.driver.$('.gh-post-bookmark-title');
+  let textContent = await element.getText()
+  assert.strictEqual(textContent, postTitle);
+});
+
+When('I click on Tags', async function() {
+  let element = await this.driver.$('[data-test-nav="tags"]');
+  return await element.click();
+});
+
+When('I click on New Tag', async function() {
+  let element = await this.driver.$('.gh-btn-primary[href="#/tags/new/"]');
+  return await element.click();
+});
+
+When('I enter tag name {kraken-string}', async function (tagName) {
+  let element = await this.driver.$('[data-test-input="tag-name"]');
+  return await element.setValue(tagName);
+});
+
+When('I click on Save button', async function() {
+  let element = await this.driver.$('[data-test-button="save"]');
+  return await element.click();
+});
+
+When('I go to Editor', async function() {
+  let element = await this.driver.$('[data-test-button="close-publish-flow"]');
+  return await element.click();
+});
+
+When('I open Post settings', async function() {
+  let element = await this.driver.$('button.settings-menu-toggle');
+  return await element.click();
+});
+
+When('I add the tag {kraken-string} to the post', async function (tagName) {
+  let element = await this.driver.$('#tag-input');
+  await element.setValue(tagName);
+  await element.keys('Enter');
+  let element2 = await this.driver.$('[data-test-button="publish-save"]');
+  return await element2.click();
+});
+
+When('I open published post', async function() {
+  let element = await this.driver.$('[data-test-editor-post-status] a');
+  return await element.click();
+});
+
+Then('I should see the tag {kraken-string} in the post {kraken-string}', async function (tagName, postTitle) {
+  let element1 = await this.driver.$('.gh-article-tag');
+  let textContent1 = await element1.getText()
+  assert.strictEqual(textContent1, tagName.toUpperCase());
+  let element2 = await this.driver.$('.gh-article-title');
+  let textContent2 = await element2.getText()
+  assert.strictEqual(textContent2, postTitle);
+});
+
+When('I go back to Dashboard', async function() {
+  let element = await this.driver.$('.gh-back-to-editor');
+  return await element.click();
+});
+
+When('I go to Published posts', async function() {
+  let element = await this.driver.$('[data-test-nav-custom="posts-Published"]');
+  return await element.click();
+});
+
+Then('I should see the 2 posts with title {kraken-string}', async function (postTitle) {
+  let elements = await this.driver.$$('.gh-content-entry-title');
+  let matchingElements = await Promise.all(elements.map(async (element) => {
+    let textContent = await element.getText();
+    return textContent === postTitle ? element : null;
+  }));
+  assert.strictEqual(matchingElements.filter((element) => element !== null).length, 2);
+});
+
+When('I click on the post with title {kraken-string}', async function (postTitle) {
+  let elements = await this.driver.$$('.gh-content-entry-title');
+  for (let element of elements) {
+    let textContent = await element.getText();
+    if (textContent === postTitle) {
+      return await element.click();
+    }
+  }
+  throw new Error(`Post with title ${postTitle} not found`);
+});
+
+When('I delete the post', async function() {
+  let element1 = await this.driver.$('[data-test-button="delete-post"]');
+  await element1.click();
+  let element2 = await this.driver.$('[data-test-button="delete-post-confirm"]');
+  return await element2.click();
+});
+
+Then('I should see no posts with title {kraken-string}', async function (postTitle) {
+  let elements = await this.driver.$$('.gh-content-entry-title');
+  let matchingElements = await Promise.all(elements.map(async (element) => {
+    let textContent = await element.getText();
+    return textContent === postTitle ? element : null;
+  }));
+  assert.strictEqual(matchingElements.filter((element) => element !== null).length, 0);
+});
+
+Then('I should see the title {kraken-string} in the post', async function (postTitle) {
+  let element = await this.driver.$('.gh-article-title');
+  let textContent = await element.getText()
+  assert.strictEqual(textContent, postTitle);
 });
