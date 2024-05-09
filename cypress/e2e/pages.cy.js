@@ -21,8 +21,7 @@ describe('Pages feature', () => {
     pagePage.createPage(newPageInfo.title, newPageInfo.content)
 
     // Then
-    const pages = await pagePage.getPages();
-    expect(pages).to.include(newPageInfo.title)
+    pagePage.checkPageExists(newPageInfo.title);
   });
 
   it('Eliminación de nueva página', async () => {
@@ -35,8 +34,7 @@ describe('Pages feature', () => {
     pagePage.deletePage(newPageInfo.title);
 
     //Then
-    const pages = await pagePage.getPages();
-    expect(pages).to.not.include(newPageInfo.title)
+    pagePage.checkPageExists(newPageInfo.title)
   });
 
 
@@ -44,15 +42,12 @@ describe('Pages feature', () => {
     // Given
     const newPageInfo = { title: faker.lorem.word(), content: faker.lorem.word() }
     const pagePage = dashboardPage.goToPages();
-    pagePage.createPage(newPageInfo.title, newPageInfo.content)
     
     // When
-    const pageContent = await pagePage.getPageContent(newPageInfo.title);
-
+    pagePage.createPage(newPageInfo.title, newPageInfo.content)
+    
     // //Then
-    expect(pageContent?.title).to.equal(newPageInfo.title)
-    expect(pageContent?.content).to.equal(newPageInfo.content)
- 
+    pagePage.checkContentExist(newPageInfo.title, newPageInfo.content);
   })
 
   it('Editar página', async () => {
@@ -63,26 +58,21 @@ describe('Pages feature', () => {
     
     // When
     pagePage.editPage(newPageInfo.title, 'new-title', 'new-content');
-    const pages = await pagePage.getPages();
     
     // //Then
-    expect(pages).to.include('new-title')
+    pagePage.checkPageExists(newPageInfo.title);
   })
 
   it('Publicar página', async () => {
-        // Given
-        const newPageInfo = { title: faker.lorem.word(), content: faker.lorem.word() }
-        const pagePage = dashboardPage.goToPages();
-        pagePage.createPage(newPageInfo.title, newPageInfo.content)
-
-        // When
-        pagePage.publishPage(newPageInfo.title)
-
-        // Then
-        const status = await pagePage.getPageStatus(newPageInfo.title);
-        expect(status).to.equal('Published')
-        
-
+    // Given
+    const newPageInfo = { title: faker.lorem.word(), content: faker.lorem.word() }
+    const pagePage = dashboardPage.goToPages();
+    pagePage.createPage(newPageInfo.title, newPageInfo.content)
+    // When
+    pagePage.publishPage(newPageInfo.title)
+    pagePage.scrollUntilNoMoreRequests()
+    // Then
+    pagePage.checkPageStatus(newPageInfo.title, 'Published');
   });
 
 });

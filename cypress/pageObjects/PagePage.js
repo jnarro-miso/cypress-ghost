@@ -33,6 +33,14 @@ export class PagePage {
     cy.get("[data-test-link='pages']").click();
   }
 
+  checkPageExists(pageTitle) {
+    this.getElementByText(pageTitle).should('exist');
+  }
+
+  getElementByText(text) {
+    return cy.get(`//*/*/*[text() = '${text}']`)
+  }
+
   getPages() {
     try {
       return cy.get("[role='menuitem']").then((pageItems) => {
@@ -68,29 +76,68 @@ export class PagePage {
   }
 
   async getPageContent(page) {
+  }
+
+  checkContentExist(page, content) {
     this.goToPage(page);
-    return cy.get('.gh-editor-title-container textarea')
+    cy.get('.gh-editor-title-container textarea')
     .invoke('val')
     .then(title => {
       cy.get('.kg-prose')
         .invoke('text')
         .then(paragraph => {
-           return {
-            title: title.trim(),
-            content: paragraph.trim()
-          };
+          wrap(title).should('equal', title);
+          wrap(paragraph).should('equal', content);
         });
     });
   }
 
-  async getPageStatus(page) {
-    return cy.get('.gh-posts-list-item-group li')
+  checkPageStatus(page, status) {
+
+    cy.get('.gh-posts-list-item-group li')
     .contains('h3', page)
     .parent('a')
     .then(a => {
-      return a[0].lastElementChild.innerText;
+      cy.wrap(a[0].lastElementChild.innerText).should('equal', status);
     })
   }
+
+  moreRequestsExist = () => {
+    let currentScrollPosition = 0;
+    cy.window().then(win => {
+        currentScrollPosition = win.scrollY;
+    });
+    this.scrollToBottom();
+    cy.wait(2000);
+    let newScrollPosition = 0;
+    cy.window().then(win => {
+        newScrollPosition = win.scrollY;
+    });
+    if (newScrollPosition > currentScrollPosition) {
+        return true;
+    } else {
+        return false;
+    }
+};
+  
+  scrollToBottom = () => {
+    cy.window().then(win => {
+        win.scrollTo(0, win.document.body.scrollHeight);
+    });
+  };
+
+  scrollUntilNoMoreRequests = () => {
+    cy.wrap().then(() => {
+        this.scrollToBottom();
+
+        cy.wait(2000);
+
+        if (this.moreRequestsExist()) {
+            this.scrollUntilNoMoreRequests();
+        }
+    });
+  };
+
 
 }
 
