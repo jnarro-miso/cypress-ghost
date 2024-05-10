@@ -44,7 +44,7 @@ describe('Posts feature', () => {
   })
 
   // Scenario EP02: Creating a post, creating a tag, and adding the tag to the post
-  it.skip('should create a post, create a tag, and add the tag to the post', () => {
+  it('should create a post, create a tag, and add the tag to the post', () => {
     const newPost = { title: faker.lorem.words(), content: faker.lorem.paragraph() }
     const newTag = faker.lorem.word()
     
@@ -76,7 +76,7 @@ describe('Posts feature', () => {
   })
 
   // Scenario EP03: Creating two posts with the same title
-  it.skip('should allow creating two posts with the same title', () => {
+  it('should allow creating two posts with the same title', () => {
     const newPostTitle = faker.lorem.words()
   
     // When the user creates a post
@@ -120,7 +120,7 @@ describe('Posts feature', () => {
   })
 
   // Scenario EP04: Creating a post, verify it is published, delete it, and verify it is deleted
-  it.skip('should create a post, verify it is published, delete it, and verify it is deleted', () => {
+  it('should create a post, verify it is published, delete it, and verify it is deleted', () => {
     const newPost = { title: faker.lorem.words(), content: faker.lorem.paragraph() }
     
     // When the user creates a post
@@ -150,7 +150,7 @@ describe('Posts feature', () => {
   })
 
   // Scenario EP05: Creating a post, verify it is published, and update it
-  it.skip('should create a post, verify it is published, and update it', () => {
+  it('should create a post, verify it is published, and update it', () => {
     const newPost = { title: faker.lorem.words(), content: faker.lorem.paragraph() }
     const updatedPost = { title: faker.lorem.word(), content: faker.lorem.paragraph() }
     
