@@ -102,13 +102,13 @@ describe('Posts feature', () => {
         cy.visit(post1EditorUrl)
         cy.screenshot('visitPost1EditorUrl')
         postPage.toggleSettings()
-        cy.screenshot('toggleSettings-1')
+        cy.screenshot('openSettings-1')
         postPage.getInputValue('#url').then(post1Url => {
           cy.screenshot('getInputValue-1')
           cy.visit(post2EditorUrl)
           cy.screenshot('visitPost2EditorUrl')
           postPage.toggleSettings()
-          cy.screenshot('toggleSettings-2')
+          cy.screenshot('openSettings-2')
           postPage.getInputValue('#url').then(post2Url => {
             cy.screenshot('getInputValue-2')
             expect(post1Url).not.to.equal(post2Url)
