@@ -60,9 +60,8 @@ describe('Posts feature', () => {
     cy.screenshot('createPost')
     // And adds the tag to the post
     postPage.goToEditor()
-    cy.screenshot('goToEditor')
     postPage.toggleSettings()
-    cy.screenshot('toggleSettings')
+    cy.screenshot('openSettings')
     postPage.selectTag(newTag)
     cy.screenshot('selectTag')
     

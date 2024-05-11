@@ -8,8 +8,18 @@ export class DashboardPage {
     return new PostPage();
   }
 
+  goToPostsOld() {
+    cy.visit(Cypress.env('OLD_GHOST_ADMIN_URL') + '#/posts')
+    return new PostPage();
+  }
+
   goToTags() {
     cy.visit(Cypress.env('GHOST_ADMIN_URL') + '#/tags')
+    return new TagsPage();
+  }
+
+  goToTagsOld() {
+    cy.visit(Cypress.env('OLD_GHOST_ADMIN_URL') + '#/tags')
     return new TagsPage();
   }
   
