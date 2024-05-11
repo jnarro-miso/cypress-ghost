@@ -47,4 +47,48 @@ describe('Posts feature (Ghost older version)', () => {
     cy.screenshot('checkPostExists')
   })
 
+  // Scenario EP03: Creating two posts with the same title
+  it('should allow creating two posts with the same title', () => {
+    const newPostTitle = faker.lorem.words()
+  
+    // When the user creates a post
+    let postPage = dashboardPage.goToPostsOld()
+    cy.screenshot('goToPosts-1')
+    postPage.createPostOld(newPostTitle, faker.lorem.paragraph()).then(post1EditorUrl => {
+      cy.screenshot('createPost-1')
+      // And creates another post with the same title
+      postPage = dashboardPage.goToPostsOld()
+      cy.screenshot('goToPosts-2')
+      postPage.createPostOld(newPostTitle, faker.lorem.paragraph()).then(post2EditorUrl => {
+        cy.screenshot('createPost-2')
+        const post1Id = post1EditorUrl.split('/').pop()
+        const post2Id = post2EditorUrl.split('/').pop()
+  
+        // Then both posts should be visible on the posts page
+        postPage = dashboardPage.goToPostsOld()
+        cy.screenshot('goToPosts-3')
+        postPage.findPostByIdOld(post1Id).should('exist')
+        cy.screenshot('findPostById-1')
+        postPage.findPostByIdOld(post2Id).should('exist')
+        cy.screenshot('findPostById-2')
+        // And their URLs should be different
+        cy.visit(post1EditorUrl)
+        cy.screenshot('visitPost1EditorUrl')
+        postPage.openSettingsOld()
+        cy.screenshot('openSettings-1')
+        postPage.getInputValue('#url').then(post1Url => {
+          cy.screenshot('getInputValue-1')
+          cy.visit(post2EditorUrl)
+          cy.screenshot('visitPost2EditorUrl')
+          postPage.openSettingsOld()
+          cy.screenshot('openSettings-2')
+          postPage.getInputValue('#url').then(post2Url => {
+            cy.screenshot('getInputValue-2')
+            expect(post1Url).not.to.equal(post2Url)
+          })
+        })
+      })
+    })
+  })
+
 })

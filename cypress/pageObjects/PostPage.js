@@ -10,6 +10,10 @@ export class PostPage {
     return cy.get(`[data-test-post-id='${id}']`)
   }
 
+  findPostByIdOld(id) {
+    return cy.get(`.gh-post-list-title[href="#/editor/post/${id}/"]`)
+  }
+
   findPostByText(text) {
     this.sortByRecentlyUpdated()
     return cy.get('.gh-posts-list-item-group').filter(`:contains('${text}')`)
@@ -72,6 +76,12 @@ export class PostPage {
   createDraft(title = 'My draft', content = 'My draft content') {
     this.startNewPost(title, content)
     cy.get("[data-test-link='posts']").click()
+  }
+
+  createDraftOld(title = 'My draft', content = 'My draft content') {
+    cy.get(".gh-nav-new-post[href='#/editor/post/']").click()
+    cy.get("[placeholder='Post Title']").type(title)
+    cy.get('a[href="#/posts/"]').click()
   }
 
   deletePost() {
