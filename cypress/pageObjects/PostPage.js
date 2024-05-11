@@ -59,6 +59,16 @@ export class PostPage {
     return cy.url()
   }
 
+  createPostOld(title = 'My post title', content = 'My post content') {
+    cy.get(".gh-nav-new-post[href='#/editor/post/']").click()
+    cy.get("[placeholder='Post Title']").type(title)
+    cy.get(".gh-koenig-editor-pane").click()
+    cy.get(".gh-publishmenu-trigger").click()
+    cy.get("button.gh-publishmenu-button").click()
+    cy.contains('Published').should('be.visible')
+    return cy.url()
+  }
+
   createDraft(title = 'My draft', content = 'My draft content') {
     this.startNewPost(title, content)
     cy.get("[data-test-link='posts']").click()
@@ -79,6 +89,10 @@ export class PostPage {
     cy.get("button.settings-menu-toggle").click()
   }
 
+  openSettingsOld() {
+    cy.get("button.post-settings").click()
+  }
+
   publishPost() {
     cy.get("[data-test-button='publish-save']:visible").click()
     cy.contains('Updated').should('be.visible')
@@ -88,6 +102,14 @@ export class PostPage {
     cy.get("#tag-input").type(tagName).type('{enter}')
     this.toggleSettings()
     cy.get("[data-test-button='publish-save']:visible").click()
+    cy.contains('Updated').should('be.visible')
+  }
+
+  selectTagOld(tagName) {
+    cy.get("#tag-input").type(tagName).type('{enter}')
+    cy.get("button.close").click()
+    cy.get(".gh-publishmenu-trigger").click()
+    cy.get("button.gh-publishmenu-button").click()
     cy.contains('Updated').should('be.visible')
   }
 
