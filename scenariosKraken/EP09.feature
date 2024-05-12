@@ -10,5 +10,6 @@ Scenario: EP09 - Edición de suscriptores
   And I select member
   And I complete the form for edit member
   And I save the changes
+  And I wait for 2 seconds
   And I search a edited member
   Then I validate that the member was edited succesful

@@ -11,6 +11,7 @@ Feature: Semana 5
   And I wait for 2 seconds
   And I complete the form for new member
   And I click on Save
+  And I wait for 2 seconds
   And I search the member that was created
   And I wait for 2 seconds
   Then I validate that the member was created succesful
