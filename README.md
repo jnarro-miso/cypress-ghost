@@ -13,18 +13,35 @@
 - Node v16.20.2
 - Cypress 13.8.1
 - Ghost 5.82.6 desplegado en https://ghost-rpq7.onrender.com/
-- Ghost 3.42.0 por desplegar
+- Ghost 3.42.0 desplegado en https://ghost-l9hj.onrender.com/
 
 ## Instalación
 
-`npm install`
+- Clonar el repositorio
+```bash
+git clone git@github.com:jnarro-miso/ghost-e2e.git
+```
+
+- Instalar dependencias
+```bash
+npm install
+```
 
 ## Ejecución
 
-- Tests de Cypress:
+### Tests de Cypress:
+```bash
+npm run test:cypress
+```
 
-`npm run test:cypress`
+### Tests de Kraken
 
-- Tests de Kraken
+- Hacer ejecutable el script
+```bash
+chmod +x runKrakenTests.sh
+```
 
-`npm run test:kraken`
+- Ejecutar el script que corre los escenarios
+```bash
+./runKrakenTests.sh
+```
