@@ -11,6 +11,116 @@
   "onReadyScript": "puppet/onReady.js",
   "scenarios": [
     {
+      "label": "EP02-1",
+      "url": "./cypress/screenshots/posts-old.cy.js/Ghost-3.42-EP02-1.png",
+      "referenceUrl":"./cypress/screenshots/posts.cy.js/Ghost-5.82-EP02-1.png"
+    },
+    {
+      "label": "EP02-2",
+      "url": "./cypress/screenshots/posts-old.cy.js/Ghost-3.42-EP02-2.png",
+      "referenceUrl":"./cypress/screenshots/posts.cy.js/Ghost-5.82-EP02-2.png"
+    },
+    {
+      "label": "EP02-3",
+      "url": "./cypress/screenshots/posts-old.cy.js/Ghost-3.42-EP02-3.png",
+      "referenceUrl":"./cypress/screenshots/posts.cy.js/Ghost-5.82-EP02-3.png"
+    },
+    {
+      "label": "EP02-4",
+      "url": "./cypress/screenshots/posts-old.cy.js/Ghost-3.42-EP02-4.png",
+      "referenceUrl":"./cypress/screenshots/posts.cy.js/Ghost-5.82-EP02-4.png"
+    },
+    {
+      "label": "EP02-5",
+      "url": "./cypress/screenshots/posts-old.cy.js/Ghost-3.42-EP02-5.png",
+      "referenceUrl":"./cypress/screenshots/posts.cy.js/Ghost-5.82-EP02-5.png"
+    },
+    {
+      "label": "EP02-6",
+      "url": "./cypress/screenshots/posts-old.cy.js/Ghost-3.42-EP02-6.png",
+      "referenceUrl":"./cypress/screenshots/posts.cy.js/Ghost-5.82-EP02-6.png"
+    },
+    {
+      "label": "EP02-7",
+      "url": "./cypress/screenshots/posts-old.cy.js/Ghost-3.42-EP02-7.png",
+      "referenceUrl":"./cypress/screenshots/posts.cy.js/Ghost-5.82-EP02-7.png"
+    },
+    {
+      "label": "EP02-8",
+      "url": "./cypress/screenshots/posts-old.cy.js/Ghost-3.42-EP02-8.png",
+      "referenceUrl":"./cypress/screenshots/posts.cy.js/Ghost-5.82-EP02-8.png"
+    },
+    {
+      "label": "EP02-9",
+      "url": "./cypress/screenshots/posts-old.cy.js/Ghost-3.42-EP02-9.png",
+      "referenceUrl":"./cypress/screenshots/posts.cy.js/Ghost-5.82-EP02-9.png"
+    },
+    {
+      "label": "EP03-1",
+      "url": "./cypress/screenshots/posts-old.cy.js/Ghost-3.42-EP03-1.png",
+      "referenceUrl":"./cypress/screenshots/posts.cy.js/Ghost-5.82-EP03-1.png"
+    },
+    {
+      "label": "EP03-2",
+      "url": "./cypress/screenshots/posts-old.cy.js/Ghost-3.42-EP03-2.png",
+      "referenceUrl":"./cypress/screenshots/posts.cy.js/Ghost-5.82-EP03-2.png"
+    },
+    {
+      "label": "EP03-3",
+      "url": "./cypress/screenshots/posts-old.cy.js/Ghost-3.42-EP03-3.png",
+      "referenceUrl":"./cypress/screenshots/posts.cy.js/Ghost-5.82-EP03-3.png"
+    },
+    {
+      "label": "EP03-4",
+      "url": "./cypress/screenshots/posts-old.cy.js/Ghost-3.42-EP03-4.png",
+      "referenceUrl":"./cypress/screenshots/posts.cy.js/Ghost-5.82-EP03-4.png"
+    },
+    {
+      "label": "EP03-5",
+      "url": "./cypress/screenshots/posts-old.cy.js/Ghost-3.42-EP03-5.png",
+      "referenceUrl":"./cypress/screenshots/posts.cy.js/Ghost-5.82-EP03-5.png"
+    },
+    {
+      "label": "EP03-6",
+      "url": "./cypress/screenshots/posts-old.cy.js/Ghost-3.42-EP03-6.png",
+      "referenceUrl":"./cypress/screenshots/posts.cy.js/Ghost-5.82-EP03-6.png"
+    },
+    {
+      "label": "EP03-7",
+      "url": "./cypress/screenshots/posts-old.cy.js/Ghost-3.42-EP03-7.png",
+      "referenceUrl":"./cypress/screenshots/posts.cy.js/Ghost-5.82-EP03-7.png"
+    },
+    {
+      "label": "EP03-8",
+      "url": "./cypress/screenshots/posts-old.cy.js/Ghost-3.42-EP03-8.png",
+      "referenceUrl":"./cypress/screenshots/posts.cy.js/Ghost-5.82-EP03-8.png"
+    },
+    {
+      "label": "EP03-9",
+      "url": "./cypress/screenshots/posts-old.cy.js/Ghost-3.42-EP03-9.png",
+      "referenceUrl":"./cypress/screenshots/posts.cy.js/Ghost-5.82-EP03-9.png"
+    },
+    {
+      "label": "EP03-10",
+      "url": "./cypress/screenshots/posts-old.cy.js/Ghost-3.42-EP03-10.png",
+      "referenceUrl":"./cypress/screenshots/posts.cy.js/Ghost-5.82-EP03-10.png"
+    },
+    {
+      "label": "EP03-11",
+      "url": "./cypress/screenshots/posts-old.cy.js/Ghost-3.42-EP03-11.png",
+      "referenceUrl":"./cypress/screenshots/posts.cy.js/Ghost-5.82-EP03-11.png"
+    },
+    {
+      "label": "EP03-12",
+      "url": "./cypress/screenshots/posts-old.cy.js/Ghost-3.42-EP03-12.png",
+      "referenceUrl":"./cypress/screenshots/posts.cy.js/Ghost-5.82-EP03-12.png"
+    },
+    {
+      "label": "EP03-13",
+      "url": "./cypress/screenshots/posts-old.cy.js/Ghost-3.42-EP03-13.png",
+      "referenceUrl":"./cypress/screenshots/posts.cy.js/Ghost-5.82-EP03-13.png"
+    },
+    {
       "label": "EP07-01",
       "url": "./cypress/screenshots/EP06-EP07-old.cy.js/EP07-01-3.42.0.png",
       "referenceUrl":"./cypress/screenshots/EP06-EP07-EP08-EP09-EP010.cy.js/EP07-01-5.82.6.png"
