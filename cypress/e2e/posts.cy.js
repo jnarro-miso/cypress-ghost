@@ -50,28 +50,28 @@ describe('Posts feature', () => {
     
     // When the user creates a tag
     let tagsPage = dashboardPage.goToTags()
-    cy.screenshot('goToTags')
+    cy.screenshot('Ghost-5.82-EP02-1')
     tagsPage.createTag(newTag)
-    cy.screenshot('createTag')
+    cy.screenshot('Ghost-5.82-EP02-2')
     // And creates a post
     const postPage = dashboardPage.goToPosts()
-    cy.screenshot('goToPosts')
+    cy.screenshot('Ghost-5.82-EP02-3')
     postPage.createPost(newPost.title, newPost.content)
-    cy.screenshot('createPost')
+    cy.screenshot('Ghost-5.82-EP02-4')
     // And adds the tag to the post
     postPage.goToEditor()
     postPage.toggleSettings()
-    cy.screenshot('openSettings')
+    cy.screenshot('Ghost-5.82-EP02-5')
     postPage.selectTag(newTag)
-    cy.screenshot('selectTag')
+    cy.screenshot('Ghost-5.82-EP02-6')
     
     // Then the tag should have one post
     tagsPage = dashboardPage.goToTags()
-    cy.screenshot('goToTags-2')
+    cy.screenshot('Ghost-5.82-EP02-7')
     cy.visit(Cypress.env('GHOST_SITE_URL') + '/tag/' + newTag)
-    cy.screenshot('visitTag')
+    cy.screenshot('Ghost-5.82-EP02-8')
     cy.contains(newPost.title).should('exist')
-    cy.screenshot('checkPostExists')
+    cy.screenshot('Ghost-5.82-EP02-9')
   })
 
   // Scenario EP03: Creating two posts with the same title
@@ -80,37 +80,37 @@ describe('Posts feature', () => {
   
     // When the user creates a post
     let postPage = dashboardPage.goToPosts()
-    cy.screenshot('goToPosts-1')
+    cy.screenshot('Ghost-5.82-EP03-1')
     postPage.createPost(newPostTitle, faker.lorem.paragraph()).then(post1EditorUrl => {
-      cy.screenshot('createPost-1')
+      cy.screenshot('Ghost-5.82-EP03-2')
       // And creates another post with the same title
       postPage = dashboardPage.goToPosts()
-      cy.screenshot('goToPosts-2')
+      cy.screenshot('Ghost-5.82-EP03-3')
       postPage.createPost(newPostTitle, faker.lorem.paragraph()).then(post2EditorUrl => {
-        cy.screenshot('createPost-2')
+        cy.screenshot('Ghost-5.82-EP03-4')
         const post1Id = post1EditorUrl.split('/').pop()
         const post2Id = post2EditorUrl.split('/').pop()
   
         // Then both posts should be visible on the posts page
         postPage = dashboardPage.goToPosts()
-        cy.screenshot('goToPosts-3')
+        cy.screenshot('Ghost-5.82-EP03-5')
         postPage.findPostById(post1Id).should('exist')
-        cy.screenshot('findPostById-1')
+        cy.screenshot('Ghost-5.82-EP03-6')
         postPage.findPostById(post2Id).should('exist')
-        cy.screenshot('findPostById-2')
+        cy.screenshot('Ghost-5.82-EP03-7')
         // And their URLs should be different
         cy.visit(post1EditorUrl)
-        cy.screenshot('visitPost1EditorUrl')
+        cy.screenshot('Ghost-5.82-EP03-8')
         postPage.toggleSettings()
-        cy.screenshot('openSettings-1')
+        cy.screenshot('Ghost-5.82-EP03-9')
         postPage.getInputValue('#url').then(post1Url => {
-          cy.screenshot('getInputValue-1')
+          cy.screenshot('Ghost-5.82-EP03-10')
           cy.visit(post2EditorUrl)
-          cy.screenshot('visitPost2EditorUrl')
+          cy.screenshot('Ghost-5.82-EP03-11')
           postPage.toggleSettings()
-          cy.screenshot('openSettings-2')
+          cy.screenshot('Ghost-5.82-EP03-12')
           postPage.getInputValue('#url').then(post2Url => {
-            cy.screenshot('getInputValue-2')
+            cy.screenshot('Ghost-5.82-EP03-13')
             expect(post1Url).not.to.equal(post2Url)
           })
         })
