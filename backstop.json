@@ -1,0 +1,55 @@
+{
+  "id": "backstop_default",
+  "viewports": [
+    {
+      "label": "tablet",
+      "width": 1000,
+      "height": 660
+    }
+  ],
+  "onBeforeScript": "puppet/onBefore.js",
+  "onReadyScript": "puppet/onReady.js",
+  "scenarios": [
+    {
+      "label": "EP07-01",
+      "url": "./cypress/screenshots/EP06-EP07-old.cy.js/EP07-01-3.42.0.png",
+      "referenceUrl":"./cypress/screenshots/EP06-EP07-EP08-EP09-EP010.cy.js/EP07-01-5.82.6.png"
+    },
+    {
+      "label": "EP07-02",
+      "url": "./cypress/screenshots/EP06-EP07-old.cy.js/EP07-02-3.42.0.png",
+      "referenceUrl":"./cypress/screenshots/EP06-EP07-EP08-EP09-EP010.cy.js/EP07-02-5.82.6.png"
+    },
+    {
+      "label": "EP07-03",
+      "url": "./cypress/screenshots/EP06-EP07-old.cy.js/EP07-03-3.42.0.png",
+      "referenceUrl":"./cypress/screenshots/EP06-EP07-EP08-EP09-EP010.cy.js/EP07-03-5.82.6.png"
+    },
+    {
+      "label": "EP07-04",
+      "url": "./cypress/screenshots/EP06-EP07-old.cy.js/EP07-04-3.42.0.png",
+      "referenceUrl":"./cypress/screenshots/EP06-EP07-EP08-EP09-EP010.cy.js/EP07-04-5.82.6.png"
+    },
+    {
+      "label": "EP07-05",
+      "url": "./cypress/screenshots/EP06-EP07-old.cy.js/EP07-05-3.42.0.png",
+      "referenceUrl":"./cypress/screenshots/EP06-EP07-EP08-EP09-EP010.cy.js/EP07-05-5.82.6.png"
+    }
+  ],
+  "paths": {
+    "bitmaps_reference": "backstop_data/bitmaps_reference",
+    "bitmaps_test": "backstop_data/bitmaps_test",
+    "engine_scripts": "backstop_data/engine_scripts",
+    "html_report": "backstop_data/html_report",
+    "ci_report": "backstop_data/ci_report"
+  },
+  "report": ["browser"],
+  "engine": "puppeteer",
+  "engineOptions": {
+    "args": ["--no-sandbox"]
+  },
+  "asyncCaptureLimit": 5,
+  "asyncCompareLimit": 50,
+  "debug": false,
+  "debugWindow": false
+}

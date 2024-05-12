@@ -45,3 +45,24 @@ chmod +x runKrakenTests.sh
 ```bash
 ./runKrakenTests.sh
 ```
+
+### Backstop a pruebas de cypress.
+- instalar de forma global la herramienta, 
+```bash
+npm install -g backstopjs
+```
+
+- Correr las pruebas de cypress para generar los screenshots
+```bash
+npm run test:cypress
+```
+
+- Definir las imagenes de referencia:
+```bash
+backstop reference
+```
+
+- Ejecutar los test:
+```bash
+backstop test
+```

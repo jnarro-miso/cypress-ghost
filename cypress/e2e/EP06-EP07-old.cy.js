@@ -30,22 +30,22 @@ describe('Escenarios de 06 y 07 en ghost 3.42.0.', function() {
       // And I click on Members
       cy.contains('a', 'Staff').click();
       cy.wait(1000);
-      cy.screenshot('EP06-01-3.43.0');
+      cy.screenshot('EP06-01-3.42.0');
 
       // // And I click on New Members
       cy.get('button.gh-btn-green').contains('Invite people').click();
       cy.wait(1000);
-      cy.screenshot('EP06-02-3.43.0');
+      cy.screenshot('EP06-02-3.42.0');
 
       // And I complete the form for new member
       cy.get('input#new-user-email').type(email);
       cy.get('select#new-user-role').select('Contributor');
-      cy.screenshot('EP06-03-3.43.0');
+      cy.screenshot('EP06-03-3.42.0');
 
       // And I click on Save
       cy.contains('button', 'Send invitation now').click();
       cy.wait(1000);
-      cy.screenshot('EP06-04-3.43.0');
+      cy.screenshot('EP06-04-3.42.0');
 
       // Then I validate that the member was created succesful
       cy.reload();
@@ -55,7 +55,7 @@ describe('Escenarios de 06 y 07 en ghost 3.42.0.', function() {
         throw new Error(`El nombre del miembro creado ("${email}") no coincide con el nombre obtenido (${text.trim()}).`);
       }
       cy.wait(1000);
-      cy.screenshot('EP06-05-3.43.0');
+      cy.screenshot('EP06-05-3.42.0');
       
     });
   
@@ -68,25 +68,25 @@ describe('Escenarios de 06 y 07 en ghost 3.42.0.', function() {
       // And I click on Members
       cy.contains('a', 'Staff').click();
       cy.wait(1000);
-      cy.screenshot('EP07-01-3.43.0');
+      cy.screenshot('EP07-01-3.42.0');
 
       // // And I select member
       cy.get('h3.apps-card-app-title')
         .first()
         .invoke('text')
         .then((text) => {
-          cy.screenshot('EP07-02-3.43.0');
+          cy.screenshot('EP07-02-3.42.0');
 
           // And I delete member 
           cy.get('a.apps-configured-action').first().click();
-          cy.screenshot('EP07-03-3.43.0');
+          cy.screenshot('EP07-03-3.42.0');
           cy.reload();
           cy.wait(2000); 
-          cy.screenshot('EP07-04-3.43.0');
+          cy.screenshot('EP07-04-3.42.0');
 
           // Then I validate that the member was deleted succesful
           cy.contains(text).should('not.exist'); 
-          cy.screenshot('EP07-05-3.43.0');     
+          cy.screenshot('EP07-05-3.42.0');     
       });
     });
 
