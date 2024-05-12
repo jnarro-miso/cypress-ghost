@@ -26,29 +26,30 @@ describe('Escenarios de 06 a 10.', function() {
     // EP06 - Creación de suscriptores desde el portal administrativo
     it('EP06 - Creación de suscriptores desde el portal administrativo', function() {
       cy.wait(1000);
+
       // And I click on Members
       cy.get('[data-test-nav="members"]').click();
       cy.wait(1000);
+
       // And I click on New Members
       cy.get('[data-test-new-member-button="true"]').click();
-      // And I wait for 2 seconds
       cy.wait(1000);
+
       // And I complete the form for new member
       cy.get('#member-name').clear().type(name);
       cy.get('#member-email').clear().type(email);
+
       // And I click on Save
       cy.get('[data-test-task-button-state="idle"]').click();
       cy.wait(1000);
-      // And I search the member that was created
+
+      // Then I validate that the member was created succesful
       cy.get('[data-test-nav="members"]').click();
       cy.get('[data-test-input="members-search"]').type(name);
-      // And I wait for 2 seconds
       cy.wait(1000);
-      // Then I validate that the member was created succesful
       cy.get('h3.gh-members-list-name')
         .invoke('text')
         .then(text => {
-          // Se valida que el texto obtenido coincida con el nombre esperado
           if (text.trim() !== name.trim()) {
             throw new Error(`El nombre del miembro creado (${name}) no coincide con el nombre obtenido (${text.trim()}).`);
           }
@@ -64,22 +65,23 @@ describe('Escenarios de 06 a 10.', function() {
       // And I click on Members
       cy.get('[data-test-nav="members"]').click();
       cy.wait(1000);
+
       // And I select member
       cy.get('h3.gh-members-list-name')
       .first()
       .invoke('text')
       .then(text => {
         cy.wait(1000);
-        // Guarda el texto del primer elemento en la variable 'member'
         cy.get('h3.gh-members-list-name').first().click();
         cy.get('[data-test-button="member-actions"]').click();
+
+        //And I delete member
         cy.get('[data-test-button="delete-member"]').click();
-        // And I confirm delete a member
         cy.get('[data-test-button="confirm"]').click();
-        // And I search to delete member
         cy.wait(1000);
-        cy.get('[data-test-input="members-search"]').type(text.trim());
+
         // Then I validate that the member was deleted succesful
+        cy.get('[data-test-input="members-search"]').type(text.trim());
         cy.get('h4')
         .invoke('text')
         .then(message => {
@@ -166,7 +168,7 @@ describe('Escenarios de 06 a 10.', function() {
       cy.wait(1000);
       // And I save the change
       cy.get('.cursor-pointer.text-green').first().click();
-      cy.get('input[placeholder="Site description"]').type(edicion);
+      cy.get('input[placeholder="Site description"]').type(name, { force: true });
       cy.get('.cursor-pointer.text-green').first().click();
       
       // // And I wait for 1 seconds
