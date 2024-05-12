@@ -19,29 +19,29 @@
 
 - Clonar el repositorio
 ```bash
-$ git clone git@github.com:jnarro-miso/ghost-e2e.git
+git clone git@github.com:jnarro-miso/ghost-e2e.git
 ```
 
 - Instalar dependencias
 ```bash
-$ npm install
+npm install
 ```
 
 ## Ejecución
 
 ### Tests de Cypress:
 ```bash
-$ npm run test:cypress
+npm run test:cypress
 ```
 
 ### Tests de Kraken
 
 - Hacer ejecutable el script
 ```bash
-$ chmod +x runKrakenTests.sh
+chmod +x runKrakenTests.sh
 ```
 
 - Ejecutar el script que correr los escenarios
 ```bash
-$ ./runKrakenTests.sh
+./runKrakenTests.sh
 ```
