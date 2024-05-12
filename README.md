@@ -41,7 +41,7 @@ npm run test:cypress
 chmod +x runKrakenTests.sh
 ```
 
-- Ejecutar el script que correr los escenarios
+- Ejecutar el script que corre los escenarios
 ```bash
 ./runKrakenTests.sh
 ```
