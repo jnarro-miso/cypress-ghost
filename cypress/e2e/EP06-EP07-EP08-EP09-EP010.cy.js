@@ -207,6 +207,7 @@ describe('Escenarios de 06 a 10.', function() {
       // // Then I access to the view site
       cy.get('#done-button-container').click();
       cy.screenshot('EP10-05-5.82.6');
+      cy.wait(1000);
       cy.get('[data-test-nav="site"]').click();
       cy.screenshot('EP10-06-5.82.6');
     });

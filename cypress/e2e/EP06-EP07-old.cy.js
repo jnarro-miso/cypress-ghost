@@ -3,7 +3,7 @@ import { LoginPage } from '../pageObjects/LoginPage';
 import { faker } from '@faker-js/faker';
 
 
-describe('Escenarios de 06 a 10.', function() {
+describe('Escenarios de 06 y 07 en ghost 3.42.0.', function() {
   const loginPage = new LoginPage()
   const name = faker.person.firstName();
   const email = faker.internet.email();
