@@ -1,7 +1,7 @@
-Feature: Verificar que la creación de tags sea exitosa
+Feature: Verificar que la edición de tags sea exitosa
 
 @user1 @web
-Scenario: Como primer usuario inicio sesion y mandó un mensaje al usuario 2
+Scenario: Verificar que la edición de tags sea exitosa
   Given I navigate to page "http://localhost:2368/ghost/"
   And I wait for 5 seconds
   When I enter email "<USERNAME1>"
