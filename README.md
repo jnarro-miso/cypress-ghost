@@ -68,6 +68,11 @@ backstop test
 ```
 
 ### Resemble a pruebas de cypress
+- Instalar reseblejs:
+```bash
+npm install resemblejs
+```
+
 - Ejecutar el script:
 ```bash
 node index.js
