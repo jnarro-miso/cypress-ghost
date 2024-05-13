@@ -122,28 +122,68 @@
     },
     {
       "label": "EP07-01",
-      "url": "./cypress/screenshots/EP06-EP07-old.cy.js/EP07-01-3.42.0.png",
+      "url": "./cypress/screenshots/EP06-EP07-EP09-old.cy.js/EP07-01-3.42.0.png",
       "referenceUrl":"./cypress/screenshots/EP06-EP07-EP08-EP09-EP010.cy.js/EP07-01-5.82.6.png"
     },
     {
       "label": "EP07-02",
-      "url": "./cypress/screenshots/EP06-EP07-old.cy.js/EP07-02-3.42.0.png",
+      "url": "./cypress/screenshots/EP06-EP07-EP09-old.cy.js/EP07-02-3.42.0.png",
       "referenceUrl":"./cypress/screenshots/EP06-EP07-EP08-EP09-EP010.cy.js/EP07-02-5.82.6.png"
     },
     {
       "label": "EP07-03",
-      "url": "./cypress/screenshots/EP06-EP07-old.cy.js/EP07-03-3.42.0.png",
+      "url": "./cypress/screenshots/EP06-EP07-EP09-old.cy.js/EP07-03-3.42.0.png",
       "referenceUrl":"./cypress/screenshots/EP06-EP07-EP08-EP09-EP010.cy.js/EP07-03-5.82.6.png"
     },
     {
       "label": "EP07-04",
-      "url": "./cypress/screenshots/EP06-EP07-old.cy.js/EP07-04-3.42.0.png",
+      "url": "./cypress/screenshots/EP06-EP07-EP09-old.cy.js/EP07-04-3.42.0.png",
       "referenceUrl":"./cypress/screenshots/EP06-EP07-EP08-EP09-EP010.cy.js/EP07-04-5.82.6.png"
     },
     {
       "label": "EP07-05",
-      "url": "./cypress/screenshots/EP06-EP07-old.cy.js/EP07-05-3.42.0.png",
+      "url": "./cypress/screenshots/EP06-EP07-EP09-old.cy.js/EP07-05-3.42.0.png",
       "referenceUrl":"./cypress/screenshots/EP06-EP07-EP08-EP09-EP010.cy.js/EP07-05-5.82.6.png"
+    },
+    {
+      "label": "EP09-1",
+      "url": "./cypress/screenshots/EP06-EP07-EP09-old.cy.js/EP09-01-3.42.0.png",
+      "referenceUrl":"./cypress/screenshots/EP06-EP07-EP08-EP09-EP010.cy.js/EP09-01-5.82.6.png"
+    },
+    {
+      "label": "EP09-2",
+      "url": "./cypress/screenshots/EP06-EP07-EP09-old.cy.js/EP09-02-3.42.0.png",
+      "referenceUrl":"./cypress/screenshots/EP06-EP07-EP08-EP09-EP010.cy.js/EP09-02-5.82.6.png"
+    },
+    {
+      "label": "EP09-3",
+      "url": "./cypress/screenshots/EP06-EP07-EP09-old.cy.js/EP09-03-3.42.0.png",
+      "referenceUrl":"./cypress/screenshots/EP06-EP07-EP08-EP09-EP010.cy.js/EP09-03-5.82.6.png"
+    },
+    {
+      "label": "EP09-4",
+      "url": "./cypress/screenshots/EP06-EP07-EP09-old.cy.js/EP09-04-3.42.0.png",
+      "referenceUrl":"./cypress/screenshots/EP06-EP07-EP08-EP09-EP010.cy.js/EP09-04-5.82.6.png"
+    },
+    {
+      "label": "EP09-5",
+      "url": "./cypress/screenshots/EP06-EP07-EP09-old.cy.js/EP09-05-3.42.0.png",
+      "referenceUrl":"./cypress/screenshots/EP06-EP07-EP08-EP09-EP010.cy.js/EP09-05-5.82.6.png"
+    },
+    {
+      "label": "EP09-6",
+      "url": "./cypress/screenshots/EP06-EP07-EP09-old.cy.js/EP09-06-3.42.0.png",
+      "referenceUrl":"./cypress/screenshots/EP06-EP07-EP08-EP09-EP010.cy.js/EP09-06-5.82.6.png"
+    },
+    {
+      "label": "EP09-7",
+      "url": "./cypress/screenshots/EP06-EP07-EP09-old.cy.js/EP09-07-3.42.0.png",
+      "referenceUrl":"./cypress/screenshots/EP06-EP07-EP08-EP09-EP010.cy.js/EP09-07-5.82.6.png"
+    },
+    {
+      "label": "EP09-8",
+      "url": "./cypress/screenshots/EP06-EP07-EP09-old.cy.js/EP09-08-3.42.0.png",
+      "referenceUrl":"./cypress/screenshots/EP06-EP07-EP08-EP09-EP010.cy.js/EP09-08-5.82.6.png"
     },
     {
       "label": "EP11-01",

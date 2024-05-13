@@ -11,7 +11,7 @@ describe('Escenarios de 06 y 07 en ghost 3.42.0.', function() {
     // Given a user is logged in to the Ghost admin
     beforeEach(() => {
       cy.wait(1000);
-      loginPage.visitOld();
+      loginPage.visitOld(); 
       cy.wait(1000);
       loginPage.loginOld(Cypress.env('USERNAME'), Cypress.env('PASSWORD'));    
       cy.wait(1000);
@@ -89,6 +89,61 @@ describe('Escenarios de 06 y 07 en ghost 3.42.0.', function() {
           cy.screenshot('EP07-05-3.42.0');     
       });
     });
+
+    // EP09 - Edición de suscriptores 
+    it('EP09 - Edición de suscriptores ', function() {
+      cy.wait(1000);
+
+      // And I click on Members
+      cy.contains('a', 'Staff').click();
+      cy.wait(1000);
+      cy.screenshot('EP09-01-3.42.0');
+      
+      // And I select member
+      cy.get('.apps-card-app')
+      .first()
+      .invoke('text')
+      .then(text => {
+        cy.wait(1000);
+        cy.get('.gh-badge.author').click();
+        cy.wait(1000);
+        cy.screenshot('EP09-02-3.42.0');
+
+        // And I complete the form for edit member
+        cy.get('#user-name').clear().type(name, { force: true });
+        cy.wait(1000);
+        cy.screenshot('EP09-03-3.42.0');
+
+        // And I save the changes
+        cy.get('.gh-btn').contains('Save').click();
+        cy.wait(1000);
+        cy.screenshot('EP09-04-3.42.0');
+        
+        // And I search a edited member
+         // And I click on Members
+        cy.contains('a', 'Staff').click();
+        cy.wait(1000);
+        cy.screenshot('EP09-05-3.42.0');
+
+        // Establecer el valor del campo de búsqueda de miembros
+        cy.contains(name);
+        cy.screenshot('EP09-06-3.42.0');
+
+      });
+        cy.contains(name).click();
+        cy.wait(1000);
+        cy.screenshot('EP09-07-3.42.0');
+
+        // Obtener el valor actual del campo de texto '#member-note'
+        cy.get('#user-name').invoke('val').then(actualValue => {
+          // Comparar el valor actual con el valor esperado
+          if (actualValue !== name) {
+            throw new Error('El valor en el campo de nota no coincide con la comparación.');
+          }
+        });
+        cy.screenshot('EP09-08-3.42.0');
+    });
+    
 
 
 

@@ -168,7 +168,7 @@ describe('Escenarios de 06 a 10.', function() {
         cy.screenshot('EP09-05-5.82.6');
         // Establecer el valor del campo de búsqueda de miembros
         cy.get('[data-test-input="members-search"]').type(text.trim());
-        cy.screenshot('EP09-06.82.6');
+        cy.screenshot('EP09-06-5.82.6');
 
       });
         cy.get('h3.gh-members-list-name').first().click();
@@ -197,9 +197,11 @@ describe('Escenarios de 06 a 10.', function() {
       // And I save the change
       cy.get('.cursor-pointer.text-green').first().click();
       cy.screenshot('EP10-02-5.82.6');
-      cy.get('input[placeholder="Site description"]').type(name, { force: true });
+      cy.get('input[placeholder="Site description"]').clear().type(name, { force: true });
+      cy.wait(1000);
       cy.screenshot('EP10-03-5.82.6');
       cy.get('.cursor-pointer.text-green').first().click();
+      cy.wait(1000);
       cy.screenshot('EP10-04-5.82.6');
       
       // // And I wait for 1 seconds
