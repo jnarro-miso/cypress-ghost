@@ -66,3 +66,22 @@ backstop reference
 ```bash
 backstop test
 ```
+
+### Resemble a pruebas de cypress
+- Ejecutar el script:
+```bash
+node index.js
+```
+
+- Revisar reporte en la carpeta `results` (situada en la raíz del proyecto).
+
+* Ojo: Para ver el reporte y sus recursos (CSS e imágenes) es necesario lanzar un 
+servidor de desarrollo local. Una opción es instalando http-server
+```bash
+npm install -g http-server
+```
+
+Y ejecutar
+```bash
+http-server [path]
+```
