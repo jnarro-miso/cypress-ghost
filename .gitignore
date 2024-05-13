@@ -11,3 +11,6 @@ reports/
 #Backstop
 backstop_data/bitmaps_reference
 backstop_data/bitmaps_test
+
+#resemblejs
+results
