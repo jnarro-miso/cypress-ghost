@@ -38,23 +38,28 @@ async function executeTest() {
       const imagePairs = [
           {
               reference: './cypress/screenshots/EP06-EP07-EP08-EP09-EP010.cy.js/EP06-01-5.82.6.png',
-              test: './cypress/screenshots/EP06-EP07-old.cy.js/EP06-01-3.42.0.png'
+              test: './cypress/screenshots/EP06-EP07-old.cy.js/EP06-01-3.42.0.png',
+              nameTest:'EP07-1'
           },
           {
               reference: './cypress/screenshots/EP06-EP07-EP08-EP09-EP010.cy.js/EP06-02-5.82.6.png',
-              test: './cypress/screenshots/EP06-EP07-old.cy.js/EP06-02-3.42.0.png'
+              test: './cypress/screenshots/EP06-EP07-old.cy.js/EP06-02-3.42.0.png',
+              nameTest:'EP07-2'
           },
           {
             reference: './cypress/screenshots/EP06-EP07-EP08-EP09-EP010.cy.js/EP06-03-5.82.6.png',
-            test: './cypress/screenshots/EP06-EP07-old.cy.js/EP06-03-3.42.0.png'
+            test: './cypress/screenshots/EP06-EP07-old.cy.js/EP06-03-3.42.0.png',
+            nameTest:'EP07-3'
         },
         {
             reference: './cypress/screenshots/EP06-EP07-EP08-EP09-EP010.cy.js/EP06-04-5.82.6.png',
-            test: './cypress/screenshots/EP06-EP07-old.cy.js/EP06-04-3.42.0.png'
+            test: './cypress/screenshots/EP06-EP07-old.cy.js/EP06-04-3.42.0.png',
+            nameTest:'EP07-4'
         },
         {
             reference: './cypress/screenshots/EP06-EP07-EP08-EP09-EP010.cy.js/EP06-05-5.82.6.png',
-            test: './cypress/screenshots/EP06-EP07-old.cy.js/EP06-05-3.42.0.png'
+            test: './cypress/screenshots/EP06-EP07-old.cy.js/EP06-05-3.42.0.png',
+            nameTest:'EP07-5'
         },
 
           // Añade más pares de imágenes aquí...
@@ -70,6 +75,7 @@ async function executeTest() {
           resultInfo[pair.reference + '_' + pair.test] = {
               reference: pair.reference,
               test: pair.test,
+              nameTest: pair.nameTest,
               isSameDimensions: data.isSameDimensions,
               dimensionDifference: data.dimensionDifference,
               rawMisMatchPercentage: data.rawMisMatchPercentage,
@@ -98,7 +104,7 @@ async function executeTest() {
         browserHTML += `
         <div class=" browser" id="test0">
             <div class=" btitle">
-                <h2>Browser: ${b}</h2>
+                <h3>${pairInfo.nameTest}</h3>
                 <p>Data: ${JSON.stringify(pairInfo)}</p>
             </div>
             <div class="imgline">
@@ -126,7 +132,7 @@ function createReport(datetime, resInfo) {
     return `
     <html>
         <head>
-            <title> VRT Report </title>
+            <title> VRT Report Resemble </title>
             <link href="index.css" type="text/css" rel="stylesheet">
         </head>
         <body>
