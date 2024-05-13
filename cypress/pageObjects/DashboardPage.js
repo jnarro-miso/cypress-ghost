@@ -28,7 +28,13 @@ export class DashboardPage {
   }
   
   goToPages() {
-    cy.get("[data-test-nav='pages']").contains("Pages").click();
+    cy.visit(Cypress.env('GHOST_ADMIN_URL') + '#/pages');
     return new PagePage();
   }
+
+  goToPagesOld() {
+    cy.visit(Cypress.env('OLD_GHOST_ADMIN_URL') + '#/pages');
+    return new PagePage();
+  }
+
 }

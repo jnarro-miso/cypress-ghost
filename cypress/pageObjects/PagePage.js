@@ -1,5 +1,16 @@
 export class PagePage {
 
+  /**
+   * New pages section
+   */
+  goBackToPagesOld() {
+    cy.get('[class="blue link fw4 flex items-center ember-view"]').click();
+  }
+
+  goBackToPages() {
+    cy.get('[class="ember-view gh-btn-editor gh-editor-back-button"]').contains("Pages").click();
+  }
+
   createPage(title, content) {
     cy.get("[data-test-new-page-button]").click();
     cy.get("[data-test-editor-title-input]").focus().type(title,  { delay: 50 });
@@ -7,6 +18,36 @@ export class PagePage {
     cy.get("[data-test-link='pages']").click()
     cy.get("[data-test-nav='pages']").contains("Pages").click();
   }
+
+
+  setPageContent(title, content) {
+    cy.get("[data-test-editor-title-input]").type(title,  { delay: 50 });
+    cy.get(".kg-prose").type(content,  { delay: 50 });
+  }
+
+  setPageContentOld(title, content) {
+    cy.get("[class='gh-editor-title ember-text-area gh-input ember-view']").type(title,  { delay: 25 });
+    cy.get('[class="koenig-editor__editor __mobiledoc-editor __has-no-content"]').type(content,  { delay: 25 });
+  }
+
+  gotoCreateNewPageOld() {
+    cy.visit(Cypress.env('OLD_GHOST_ADMIN_URL') + '#/editor/page/');
+  }
+
+  gotoCreateNewPage() {
+    cy.visit(Cypress.env('GHOST_ADMIN_URL') + '#/editor/page/');
+  }
+
+  createPageOld(title, content) {
+    cy.visit(Cypress.env('OLD_GHOST_ADMIN_URL') + '#/editor/page/');
+    cy.get("[class='gh-editor-title ember-text-area gh-input ember-view']").focus().type(title,  { delay: 60 });
+    cy.get('[class="koenig-editor__editor __mobiledoc-editor __has-no-content"]').focus().type(content,  { delay: 60 });
+    cy.get('[class="blue link fw4 flex items-center ember-view"]').click();
+  }
+
+  /*****/
+
+
 
   publishPage(page) {
     this.goToPage(page)
@@ -33,8 +74,15 @@ export class PagePage {
     cy.get("[data-test-link='pages']").click();
   }
 
+  checkPageDontExist(pageTitle) {
+    cy.contains(pageTitle).should('not.exist')
+  }
   checkPageExists(pageTitle) {
-    this.getElementByText(pageTitle).should('exist');
+    cy.contains(pageTitle).should('exist')
+  }
+
+  getElementContainingText(text) {
+    return cy.get(`//*/*/*[contains(text(), '${text}')]`)
   }
 
   getElementByText(text) {
@@ -56,26 +104,75 @@ export class PagePage {
     }
   }
 
-  deletePage(page) {
-    cy.get('.gh-posts-list-item-group li')
-      .contains('h3', page)
-      .parent('a')
-      .scrollIntoView()
-      .click();
+  /**
+   * New Page options
+   */
+  deployPageOptions() {
     cy.get('[data-test-psm-trigger]').click()
+  }
+
+  deployPageOptionsOld() {
+    cy.get('[title="Settings"]').click()
+  }
+
+  clickOnDeletePage() {
     cy.get('[data-test-button="delete-post"]')
-      .scrollIntoView()
-      .click()
+    .scrollIntoView()
+    .click()
+  }
+
+  clickOnDeletePageOld() {
+    cy.get('[class="gh-btn gh-btn-hover-red gh-btn-icon settings-menu-delete-button"]')
+    .scrollIntoView()
+    .click()
+  }
+
+  confirmPageDeletion() {
     cy.get('[data-test-button="delete-post-confirm"]').click()
+  }
+
+  confirmPageDeletionOld() {
+    cy.get('div[class="modal-footer"] button[class="gh-btn gh-btn-red gh-btn-icon ember-view"]').then((elements) => {
+      elements[0].click()
+    })    
+  }
+
+  /****/
+
+
+  selectPage(page) {
+    cy.get('.gh-posts-list-item-group li')
+    .contains('h3', page)
+    .parent('a')
+    .scrollIntoView()
+    .click();
+  }
+
+  selectPageOld(page) {
+    cy.contains('h3', page)
+    .parent('a')
+    .scrollIntoView()
+    .click();
+  }
+
+  deletePage(page) {
+    this.selectPage(page);
+    this.deployPageOptions();
+    this.clickOnDeletePage()
+    this.confirmPageDeletion()
+  }
+
+  deletePageOld(page) {
+    this.selectPageOld(page);
+    this.deployPageOptionsOld();
+    this.clickOnDeletePageOld()
+    this.confirmPageDeletionOld()
   }
 
   deletePages(pages = []) {
     for (const page of pages) {
       this.deletePage(page)
     }
-  }
-
-  async getPageContent(page) {
   }
 
   checkContentExist(page, content) {
@@ -86,11 +183,13 @@ export class PagePage {
       cy.get('.kg-prose')
         .invoke('text')
         .then(paragraph => {
-          wrap(title).should('equal', title);
-          wrap(paragraph).should('equal', content);
+          cy.wrap(title).should('equal', title);
+          cy.wrap(paragraph).should('equal', content);
         });
     });
   }
+
+  
 
   checkPageStatus(page, status) {
 
