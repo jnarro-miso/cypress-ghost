@@ -12,7 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "android-platform-tools": "^3.0.2",
-    "cypress": "^13.8.1"
+    "cypress": "^13.8.1",
+    "resemblejs": "^5.0.0"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
