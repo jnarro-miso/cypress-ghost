@@ -13,16 +13,16 @@ export class PagePage {
 
   createPage(title, content) {
     cy.get("[data-test-new-page-button]").click();
-    cy.get("[data-test-editor-title-input]").focus().type(title,  { delay: 50 });
-    cy.get(".kg-prose").focus().type(content,  { delay: 50 });
+    cy.get("[data-test-editor-title-input]").focus().type(title,  { delay: 20 });
+    cy.get(".kg-prose").focus().type(content,  { delay: 20 });
     cy.get("[data-test-link='pages']").click()
     cy.get("[data-test-nav='pages']").contains("Pages").click();
   }
 
 
   setPageContent(title, content) {
-    cy.get("[data-test-editor-title-input]").type(title,  { delay: 50 });
-    cy.get(".kg-prose").type(content,  { delay: 50 });
+    cy.get("[data-test-editor-title-input]").type(title,  { delay: 20 });
+    cy.get(".kg-prose").type(content,  { delay: 20 });
   }
 
   setPageContentOld(title, content) {
@@ -40,8 +40,8 @@ export class PagePage {
 
   createPageOld(title, content) {
     cy.visit(Cypress.env('OLD_GHOST_ADMIN_URL') + '#/editor/page/');
-    cy.get("[class='gh-editor-title ember-text-area gh-input ember-view']").focus().type(title,  { delay: 60 });
-    cy.get('[class="koenig-editor__editor __mobiledoc-editor __has-no-content"]').focus().type(content,  { delay: 60 });
+    cy.get("[class='gh-editor-title ember-text-area gh-input ember-view']").focus().type(title,  { delay: 20 });
+    cy.get('[class="koenig-editor__editor __mobiledoc-editor __has-no-content"]').focus().type(content,  { delay: 20 });
     cy.get('[class="blue link fw4 flex items-center ember-view"]').click();
   }
 
@@ -69,16 +69,16 @@ export class PagePage {
 
   editPage(page, title, content) {
     this.goToPage(page);
-    cy.get("[data-test-editor-title-input]").focus().clear().type(title,  { delay: 50 });
-    cy.get(".kg-prose").focus().clear().type(content,  { delay: 50 });
+    cy.get("[data-test-editor-title-input]").focus().clear().type(title,  { delay: 20 });
+    cy.get(".kg-prose").focus().clear().type(content,  { delay: 20 });
     cy.get("[data-test-link='pages']").click();
   }
 
-  checkPageDontExist(pageTitle) {
-    cy.contains(pageTitle).should('not.exist')
+  checkElementDontExist(elementText) {
+    cy.contains(elementText).should('not.exist')
   }
-  checkPageExists(pageTitle) {
-    cy.contains(pageTitle).should('exist')
+  checkElementExists(elementText) {
+    cy.contains(elementText).should('exist')
   }
 
   getElementContainingText(text) {
@@ -113,6 +113,15 @@ export class PagePage {
 
   deployPageOptionsOld() {
     cy.get('[title="Settings"]').click()
+  }
+
+  addUri(uri) {
+    cy.get('#url').type(uri);
+  }
+
+  addTag(tag) {
+    cy.get('#tag-input').type(tag);
+    cy.get('#tag-input').trigger('keydown', { keyCode: 13 });
   }
 
   clickOnDeletePage() {
@@ -207,7 +216,7 @@ export class PagePage {
         currentScrollPosition = win.scrollY;
     });
     this.scrollToBottom();
-    cy.wait(2000);
+    cy.wait(5000);
     let newScrollPosition = 0;
     cy.window().then(win => {
         newScrollPosition = win.scrollY;
@@ -229,7 +238,7 @@ export class PagePage {
     cy.wrap().then(() => {
         this.scrollToBottom();
 
-        cy.wait(2000);
+        cy.wait(5000);
 
         if (this.moreRequestsExist()) {
             this.scrollUntilNoMoreRequests();
@@ -237,6 +246,17 @@ export class PagePage {
     });
   };
 
+  orderPagesByRecentUpdates() {
+    // Click on the dropdown to open it
+    cy.get('[data-test-order-select="true"]').within(() => {
+      cy.get('.gh-contentfilter-menu-trigger').click();
+    });
+
+    // Select the "Recently updated" option
+    cy.get('.ember-power-select-options')
+      .contains('Recently updated')
+      .click();
+  }
 
 }
 
