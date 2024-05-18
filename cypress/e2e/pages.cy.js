@@ -450,4 +450,64 @@ describe("Pages feature", () => {
       "Twitter Description cannot be longer than 500 characters."
     );
   });
+
+  // A-priory tests
+  it("Set uri with special characters", () => {
+    // Given
+    cy.fixture("page-uri.json").then(({ specialChars }) => {
+      const pagePage = dashboardPage.goToPages();
+      // When
+      pagePage.gotoCreateNewPage();
+      pagePage.deployPageOptions();
+      pagePage.addUri(specialChars.case);
+
+      // Then
+      pagePage.checkElementExists("/" + specialChars.expected);
+    });
+  });
+
+  // A-priory tests
+  it("Set uri with white spaces", () => {
+    // Given
+    cy.fixture("page-uri.json").then(({ whiteSpaces }) => {
+      const pagePage = dashboardPage.goToPages();
+      // When
+      pagePage.gotoCreateNewPage();
+      pagePage.deployPageOptions();
+      pagePage.addUri(whiteSpaces.case);
+
+      // Then
+      pagePage.checkElementExists("/" + whiteSpaces.expected);
+    });
+  });
+
+  // A-priory tests
+  it("Set invalid URL to metadata cononical URL", () => {
+    // Given
+    cy.fixture("page-uri.json").then(({ badUrl }) => {
+      const pagePage = dashboardPage.goToPages();
+      // When
+      pagePage.gotoCreateNewPage();
+      pagePage.deployPageOptions();
+      pagePage.clickOnMetadata();
+      pagePage.setCanonicalUrl(badUrl.case);
+      // Then
+      pagePage.checkElementExists(badUrl.expected);
+    });
+  });
+
+  // A-priory tests
+  it("Set valid URL to metadata cononical URL", () => {
+    // Given
+    cy.fixture("page-uri.json").then(({ goodUrl }) => {
+      const pagePage = dashboardPage.goToPages();
+      // When
+      pagePage.gotoCreateNewPage();
+      pagePage.deployPageOptions();
+      pagePage.clickOnMetadata();
+      pagePage.setCanonicalUrl(goodUrl.case);
+      // Then
+      pagePage.checkElementDontExist(goodUrl.notExpected);
+    });
+  });
 });

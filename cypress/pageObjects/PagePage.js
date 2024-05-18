@@ -121,6 +121,7 @@ export class PagePage {
 
   addUri(uri) {
     cy.get('#url').type(uri);
+    cy.get('#url').blur();
   }
 
   addTag(tag) {
@@ -304,6 +305,21 @@ export class PagePage {
     cy.get('[name="post-setting-twitter-description"]').blur();    
   }
 
+  /*****/
+
+
+  /**
+   * Metadata Section
+   */
+
+  clickOnMetadata() {
+    cy.get('[data-test-button="meta-data"]').click();
+  }
+
+  setCanonicalUrl(url) {
+    cy.get('[name="post-setting-canonicalUrl"]').type(url);
+    cy.get('[name="post-setting-canonicalUrl"]').blur();
+  }
   /*****/
 }
 

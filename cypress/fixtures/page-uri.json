@@ -1,0 +1,18 @@
+{
+  "specialChars": {
+    "case": "Hello!!!´DNA)==)=",
+    "expected": "hello-dna"
+  },
+  "whiteSpaces": {
+    "case": "hello there",
+    "expected": "hello-there"
+  },
+  "badUrl": {
+    "case": "http:://google.com",
+    "expected": "Please enter a valid URL"
+  },
+  "goodUrl": {
+    "case": "http://google.com",
+    "notExpected": "Please enter a valid URL"
+  }
+}
