@@ -2,7 +2,7 @@ import { LoginPage } from '../pageObjects/LoginPage';
 import { faker } from '@faker-js/faker';
 
 
-describe('Escenarios de 06 a 10.', function() {
+describe('10 Escenarios correspondientes a generación de datos aleatorios.', function() {
   const loginPage = new LoginPage()
 
     // Given a user is logged in to the Ghost admin
@@ -43,7 +43,6 @@ describe('Escenarios de 06 a 10.', function() {
     });
     
     
-    
     // ----------------------------------------------------------------------------------------------------------
     // ----------------------------------------------------------------------------------------------------------
     // // Escenario #02 con datos aleatorios: EP06 - Creación de suscriptores desde el portal administrativo suministrando correo inválido.
@@ -82,10 +81,12 @@ describe('Escenarios de 06 a 10.', function() {
       cy.get('[data-test-nav="members"]').click();
       const note = faker.lorem.sentence();
       // And I select member
+      cy.wait(1000);
       cy.get('h3.gh-members-list-name')
       .first()
       .invoke('text')
       .then(text => {
+        cy.wait(1000);
         cy.get('h3.gh-members-list-name').first().click();
         // And I complete the form for edit member
         cy.get('#member-note').clear().type(note, { force: true });
@@ -97,7 +98,7 @@ describe('Escenarios de 06 a 10.', function() {
         // Click en el enlace 'members'
         cy.get('[data-test-nav="members"]').click();
         // Establecer el valor del campo de búsqueda de miembros
-        cy.get('[data-test-input="members-search"]').type(text.trim());
+        cy.get('[data-test-input="members-search"]').clear().type(text.trim());
         
       });
       cy.get('h3.gh-members-list-name').first().click();
@@ -166,7 +167,7 @@ describe('Escenarios de 06 a 10.', function() {
       cy.contains('span', 'Invite people').click();
       cy.wait(3000);
       const email = faker.internet.email();
-      cy.get('div').find('section').find('div').find('div').find('div').find('input').first().type(email);
+      cy.get('div').find('section').find('div').find('div').find('div').find('input').first().clear().type(email);
       cy.get('button.cursor-pointer.bg-black.text-white.dark\\:bg-white.dark\\:text-black.hover\\:bg-grey-900.inline-flex.items-center.justify-center.whitespace-nowrap.rounded.text-sm.transition.font-bold.h-\\[34px\\].px-4.min-w-\\[80px\\]')
       .contains('Send invitation now')
       .click();
@@ -188,7 +189,7 @@ describe('Escenarios de 06 a 10.', function() {
       cy.contains('a', 'Staff').click();
       cy.contains('span', 'Invite people').click();
       cy.wait(3000);
-      cy.get('div').find('section').find('div').find('div').find('div').find('input').first().type(faker.random.word());
+      cy.get('div').find('section').find('div').find('div').find('div').find('input').first().clear().type(faker.random.word());
       cy.get('button.cursor-pointer.bg-black.text-white.dark\\:bg-white.dark\\:text-black.hover\\:bg-grey-900.inline-flex.items-center.justify-center.whitespace-nowrap.rounded.text-sm.transition.font-bold.h-\\[34px\\].px-4.min-w-\\[80px\\]')
       .contains('Send invitation now')
       .click();
@@ -218,9 +219,9 @@ describe('Escenarios de 06 a 10.', function() {
       cy.get('a[href="#/tags/"]').click();
       cy.contains('New tag').click();
       const name = faker.random.word();
-      cy.get('input#tag-name').type(name);
-      cy.get('input[data-test-input="accentColor"]').type(faker.internet.color().substring(1));
-      cy.get('textarea#tag-description').type(faker.lorem.sentence());
+      cy.get('input#tag-name').clear().type(name);
+      cy.get('input[data-test-input="accentColor"]').clear().type(faker.internet.color().substring(1));
+      cy.get('textarea#tag-description').clear().type(faker.lorem.sentence());
       cy.contains('span[data-test-task-button-state="idle"]', 'Save').click();
       cy.wait(2000);
       cy.contains('a[title="Dashboard"]', 'Dashboard').click();
@@ -239,9 +240,9 @@ describe('Escenarios de 06 a 10.', function() {
       cy.get('a[href="#/tags/"]').click();
       
       cy.contains('New tag').click();
-      cy.get('input#tag-name').type(faker.random.word());
-      cy.get('input[data-test-input="accentColor"]').type(faker.internet.color());
-      cy.get('textarea#tag-description').type(faker.lorem.sentence());
+      cy.get('input#tag-name').clear().type(faker.random.word());
+      cy.get('input[data-test-input="accentColor"]').clear().type(faker.internet.color());
+      cy.get('textarea#tag-description').clear().type(faker.lorem.sentence());
       cy.contains('span[data-test-task-button-state="idle"]', 'Save').click();
         cy.wait(1000);
         cy.contains('The colour should be in valid hex format').should('exist'); 

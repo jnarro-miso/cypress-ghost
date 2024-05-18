@@ -3,7 +3,7 @@ import { fetchDataFromAPI } from '../support/consumesApi';
 
 
 
-describe('10 Escenarios correspondientes a a-priori.', function() {
+describe('10 Escenarios correspondientes a generación de datos a-priori.', function() {
   const loginPage = new LoginPage();
 
   let mockarooData;
@@ -186,7 +186,7 @@ describe('10 Escenarios correspondientes a a-priori.', function() {
       cy.contains('a', 'Staff').click();
       cy.contains('span', 'Invite people').click();
       cy.wait(3000);
-      cy.get('div').find('section').find('div').find('div').find('div').find('input').first().type(data.email);
+      cy.get('div').find('section').find('div').find('div').find('div').find('input').first().clear().type(data.email);
       cy.get('button.cursor-pointer.bg-black.text-white.dark\\:bg-white.dark\\:text-black.hover\\:bg-grey-900.inline-flex.items-center.justify-center.whitespace-nowrap.rounded.text-sm.transition.font-bold.h-\\[34px\\].px-4.min-w-\\[80px\\]')
       .contains('Send invitation now')
       .click();
@@ -209,7 +209,7 @@ describe('10 Escenarios correspondientes a a-priori.', function() {
       cy.contains('a', 'Staff').click();
       cy.contains('span', 'Invite people').click();
       cy.wait(1000);
-      cy.get('div').find('section').find('div').find('div').find('div').find('input').first().type(data.name);
+      cy.get('div').find('section').find('div').find('div').find('div').find('input').first().clear().type(data.name);
       cy.get('button.cursor-pointer.bg-black.text-white.dark\\:bg-white.dark\\:text-black.hover\\:bg-grey-900.inline-flex.items-center.justify-center.whitespace-nowrap.rounded.text-sm.transition.font-bold.h-\\[34px\\].px-4.min-w-\\[80px\\]')
       .contains('Send invitation now')
       .click();
@@ -248,9 +248,9 @@ describe('10 Escenarios correspondientes a a-priori.', function() {
       
       mockarooData.forEach((data, index) => {
         cy.contains('New tag').click();
-        cy.get('input#tag-name').type(data.nameTag);
-        cy.get('input[data-test-input="accentColor"]').type(data.colorTag.substring(1));
-        cy.get('textarea#tag-description').type(data.descriptionTag);
+        cy.get('input#tag-name').clear().type(data.nameTag);
+        cy.get('input[data-test-input="accentColor"]').clear().type(data.colorTag.substring(1));
+        cy.get('textarea#tag-description').clear().type(data.descriptionTag);
         cy.contains('span[data-test-task-button-state="idle"]', 'Save').click();
         cy.wait(2000);
         cy.contains('a[title="Dashboard"]', 'Dashboard').click();
@@ -272,9 +272,9 @@ describe('10 Escenarios correspondientes a a-priori.', function() {
       
       mockarooData.forEach((data, index) => {
         cy.contains('New tag').click();
-        cy.get('input#tag-name').type(data.nameTag);
-        cy.get('input[data-test-input="accentColor"]').type(data.colorTag);
-        cy.get('textarea#tag-description').type(data.descriptionTag);
+        cy.get('input#tag-name').clear().type(data.nameTag);
+        cy.get('input[data-test-input="accentColor"]').clear().type(data.colorTag);
+        cy.get('textarea#tag-description').clear().type(data.descriptionTag);
         cy.contains('span[data-test-task-button-state="idle"]', 'Save').click();
         cy.wait(1000);
         cy.contains('The colour should be in valid hex format').should('exist'); 
