@@ -19,7 +19,6 @@ export class PagePage {
     cy.get("[data-test-nav='pages']").contains("Pages").click();
   }
 
-
   setPageContent(title, content) {
     cy.get("[data-test-editor-title-input]").type(title,  { delay: 20 });
     cy.get(".kg-prose").type(content,  { delay: 20 });
@@ -115,6 +114,11 @@ export class PagePage {
     cy.get('[title="Settings"]').click()
   }
 
+  setPublishDate(hour) {
+    cy.get("[data-test-date-time-picker-date-input]").type(hour);
+    cy.get("[data-test-date-time-picker-date-input]").blur()
+  }
+
   addUri(uri) {
     cy.get('#url').type(uri);
   }
@@ -122,6 +126,11 @@ export class PagePage {
   addTag(tag) {
     cy.get('#tag-input').type(tag);
     cy.get('#tag-input').trigger('keydown', { keyCode: 13 });
+  }
+
+  setExcerpt(excerpt) {
+    cy.get("#custom-excerpt").type(excerpt);
+    cy.get("#custom-excerpt").blur();
   }
 
   clickOnDeletePage() {
@@ -258,6 +267,44 @@ export class PagePage {
       .click();
   }
 
+  /**
+   * Facebook Card section
+   */
+
+  clickOnFacebookCard() {
+    cy.get('[data-test-button="facebook-data"]').click();
+  }
+  
+  setFacebookCardTitle(title) {
+    cy.get('[name="post-setting-og-title"]').type(title);
+    cy.get('[name="post-setting-og-title"]').blur();
+  }
+
+  setFacebookCardDescription(description) {
+    cy.get('[name="post-setting-og-description"]').type(description);
+    cy.get('[name="post-setting-og-description"]').blur();
+  }
+  /*****/
+
+  /**
+   * X Card section
+   */
+
+  clickOnXCard() {
+    cy.get('[data-test-button="twitter-data"]').click()
+  }
+
+  setXCardTitle(title) {
+    cy.get("#twitter-title").type(title);
+    cy.get("#twitter-title").blur();
+  }
+
+  setXCardDescription(description) {
+    cy.get('[name="post-setting-twitter-description"]').type(description);
+    cy.get('[name="post-setting-twitter-description"]').blur();    
+  }
+
+  /*****/
 }
 
 
