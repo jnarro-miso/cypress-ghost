@@ -294,7 +294,7 @@ describe('Posts feature with pseudo-random data', () => {
   })
 })
 
-// With a priori data (16)
+// With a priori data (18)
 describe('Posts feature with static data', () => {
   const loginPage = new LoginPage()
   let dashboardPage
