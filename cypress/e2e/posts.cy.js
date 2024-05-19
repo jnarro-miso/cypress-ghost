@@ -208,7 +208,6 @@ describe('Posts feature with static data', () => {
     cy.fixture('posts-a-priori.json').then(({ empty }) => {
       // When the user creates a post
       let postPage = dashboardPage.goToPosts()
-      cy.screenshot('goToPosts-1')
       postPage.createPost(empty.title, empty.content)
       if (!Cypress.env('publishButtonFound')) {
         expect(Cypress.env('publishButtonFound')).to.be.false;
@@ -221,15 +220,11 @@ describe('Posts feature with static data', () => {
     cy.fixture('posts-a-priori.json').then(({ onlyTitle }) => {
       // When the user creates a post
       let postPage = dashboardPage.goToPosts()
-      cy.screenshot('goToPosts-1')
       postPage.createPost(onlyTitle.title, onlyTitle.content)
-      cy.screenshot('createPost')
       
       // Then the post should be visible on the posts page as published
       postPage = dashboardPage.goToPosts()
-      cy.screenshot('goToPosts-3')
       postPage.checkPublishedPostExists(onlyTitle.title)
-      cy.screenshot('checkPublishedPostExists')
     })
   })
 
@@ -238,15 +233,11 @@ describe('Posts feature with static data', () => {
     cy.fixture('posts-a-priori.json').then(({ onlyContent }) => {
       // When the user creates a post
       let postPage = dashboardPage.goToPosts()
-      cy.screenshot('goToPosts-1')
       postPage.createPost(onlyContent.title, onlyContent.content)
-      cy.screenshot('createPost')
       
       // Then the post should be visible on the posts page as published
       postPage = dashboardPage.goToPosts()
-      cy.screenshot('goToPosts-3')
       postPage.checkPublishedPostExists(onlyContent.title)
-      cy.screenshot('checkPublishedPostExists')
     })
   })
 
@@ -255,15 +246,11 @@ describe('Posts feature with static data', () => {
     cy.fixture('posts-a-priori.json').then(({ titleAndContent }) => {
       // When the user creates a post
       let postPage = dashboardPage.goToPosts()
-      cy.screenshot('goToPosts-1')
       postPage.createPost(titleAndContent.title, titleAndContent.content)
-      cy.screenshot('createPost')
       
       // Then the post should be visible on the posts page as published
       postPage = dashboardPage.goToPosts()
-      cy.screenshot('goToPosts-3')
       postPage.checkPublishedPostExists(titleAndContent.title)
-      cy.screenshot('checkPublishedPostExists')
     })
   })
 
@@ -272,15 +259,11 @@ describe('Posts feature with static data', () => {
     cy.fixture('posts-a-priori.json').then(({ longTitle }) => {
       // When the user creates a post
       let postPage = dashboardPage.goToPosts()
-      cy.screenshot('goToPosts-1')
       postPage.createPost(longTitle.title, longTitle.content)
-      cy.screenshot('createPost')
       
       // Then the post should be visible on the posts page as published
       postPage = dashboardPage.goToPosts()
-      cy.screenshot('goToPosts-3')
       postPage.checkPublishedPostExists(longTitle.title)
-      cy.screenshot('checkPublishedPostExists')
     })
   })
 
@@ -289,15 +272,11 @@ describe('Posts feature with static data', () => {
     cy.fixture('posts-a-priori.json').then(({ longContent }) => {
       // When the user creates a post
       let postPage = dashboardPage.goToPosts()
-      cy.screenshot('goToPosts-1')
       postPage.createPost(longContent.title, longContent.content)
-      cy.screenshot('createPost')
       
       // Then the post should be visible on the posts page as published
       postPage = dashboardPage.goToPosts()
-      cy.screenshot('goToPosts-3')
       postPage.checkPublishedPostExists(longContent.title)
-      cy.screenshot('checkPublishedPostExists')
     })
   })
 
@@ -306,15 +285,11 @@ describe('Posts feature with static data', () => {
     cy.fixture('posts-a-priori.json').then(({ withNumbers }) => {
       // When the user creates a post
       let postPage = dashboardPage.goToPosts()
-      cy.screenshot('goToPosts-1')
       postPage.createPost(withNumbers.title, withNumbers.content)
-      cy.screenshot('createPost')
       
       // Then the post should be visible on the posts page as published
       postPage = dashboardPage.goToPosts()
-      cy.screenshot('goToPosts-3')
       postPage.checkPublishedPostExists(withNumbers.title)
-      cy.screenshot('checkPublishedPostExists')
     })
   })
 
@@ -323,15 +298,11 @@ describe('Posts feature with static data', () => {
     cy.fixture('posts-a-priori.json').then(({ specialCharacters }) => {
       // When the user creates a post
       let postPage = dashboardPage.goToPosts()
-      cy.screenshot('goToPosts-1')
       postPage.createPost(specialCharacters.title, specialCharacters.content)
-      cy.screenshot('createPost')
       
       // Then the post should be visible on the posts page as published
       postPage = dashboardPage.goToPosts()
-      cy.screenshot('goToPosts-3')
       postPage.checkPublishedPostExists(specialCharacters.title)
-      cy.screenshot('checkPublishedPostExists')
     })
   })
 
@@ -340,15 +311,11 @@ describe('Posts feature with static data', () => {
     cy.fixture('posts-a-priori.json').then(({ htmlInjection }) => {
       // When the user creates a post
       let postPage = dashboardPage.goToPosts()
-      cy.screenshot('goToPosts-1')
       postPage.createPost(htmlInjection.title, htmlInjection.content)
-      cy.screenshot('createPost')
       
       // Then the post should be visible on the posts page as published
       postPage = dashboardPage.goToPosts()
-      cy.screenshot('goToPosts-3')
       postPage.checkPublishedPostExists(htmlInjection.title)
-      cy.screenshot('checkPublishedPostExists')
     })
   })
 
@@ -357,15 +324,11 @@ describe('Posts feature with static data', () => {
     cy.fixture('posts-a-priori.json').then(({ sqlInjection }) => {
       // When the user creates a post
       let postPage = dashboardPage.goToPosts()
-      cy.screenshot('goToPosts-1')
       postPage.createPost(sqlInjection.title, sqlInjection.content)
-      cy.screenshot('createPost')
       
       // Then the post should be visible on the posts page as published
       postPage = dashboardPage.goToPosts()
-      cy.screenshot('goToPosts-3')
       postPage.checkPublishedPostExists(sqlInjection.title)
-      cy.screenshot('checkPublishedPostExists')
     })
   })
 
@@ -374,15 +337,11 @@ describe('Posts feature with static data', () => {
     cy.fixture('posts-a-priori.json').then(({ multipleParagraphs }) => {
       // When the user creates a post
       let postPage = dashboardPage.goToPosts()
-      cy.screenshot('goToPosts-1')
       postPage.createPost(multipleParagraphs.title, multipleParagraphs.content)
-      cy.screenshot('createPost')
       
       // Then the post should be visible on the posts page as published
       postPage = dashboardPage.goToPosts()
-      cy.screenshot('goToPosts-3')
       postPage.checkPublishedPostExists(multipleParagraphs.title)
-      cy.screenshot('checkPublishedPostExists')
     })
   })
 
@@ -391,15 +350,11 @@ describe('Posts feature with static data', () => {
     cy.fixture('posts-a-priori.json').then(({ markdown }) => {
       // When the user creates a post
       let postPage = dashboardPage.goToPosts()
-      cy.screenshot('goToPosts-1')
       postPage.createPost(markdown.title, markdown.content)
-      cy.screenshot('createPost')
       
       // Then the post should be visible on the posts page as published
       postPage = dashboardPage.goToPosts()
-      cy.screenshot('goToPosts-3')
       postPage.checkPublishedPostExists(markdown.title)
-      cy.screenshot('checkPublishedPostExists')
     })
   })
 
@@ -408,15 +363,11 @@ describe('Posts feature with static data', () => {
     cy.fixture('posts-a-priori.json').then(({ emojisInTitle }) => {
       // When the user creates a post
       let postPage = dashboardPage.goToPosts()
-      cy.screenshot('goToPosts-1')
       postPage.createPost(emojisInTitle.title, emojisInTitle.content)
-      cy.screenshot('createPost')
       
       // Then the post should be visible on the posts page as published
       postPage = dashboardPage.goToPosts()
-      cy.screenshot('goToPosts-3')
       postPage.checkPublishedPostExists(emojisInTitle.title)
-      cy.screenshot('checkPublishedPostExists')
     })
   })
 
@@ -425,15 +376,11 @@ describe('Posts feature with static data', () => {
     cy.fixture('posts-a-priori.json').then(({ emojisInContent }) => {
       // When the user creates a post
       let postPage = dashboardPage.goToPosts()
-      cy.screenshot('goToPosts-1')
       postPage.createPost(emojisInContent.title, emojisInContent.content)
-      cy.screenshot('createPost')
       
       // Then the post should be visible on the posts page as published
       postPage = dashboardPage.goToPosts()
-      cy.screenshot('goToPosts-3')
       postPage.checkPublishedPostExists(emojisInContent.title)
-      cy.screenshot('checkPublishedPostExists')
     })
   })
 
@@ -442,15 +389,11 @@ describe('Posts feature with static data', () => {
     cy.fixture('posts-a-priori.json').then(({ emojisInTitleAndContent }) => {
       // When the user creates a post
       let postPage = dashboardPage.goToPosts()
-      cy.screenshot('goToPosts-1')
       postPage.createPost(emojisInTitleAndContent.title, emojisInTitleAndContent.content)
-      cy.screenshot('createPost')
       
       // Then the post should be visible on the posts page as published
       postPage = dashboardPage.goToPosts()
-      cy.screenshot('goToPosts-3')
       postPage.checkPublishedPostExists(emojisInTitleAndContent.title)
-      cy.screenshot('checkPublishedPostExists')
     })
   })
 
