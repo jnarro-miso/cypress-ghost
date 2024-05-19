@@ -248,6 +248,20 @@ describe("Pages feature", () => {
   });
 
   // Escenario aleatorio
+  it("Set publish hour in incorrect format", () => {
+    // Given
+    const hour = faker.string.alpha(5);
+    const pagePage = dashboardPage.goToPages();
+    // When
+    pagePage.gotoCreateNewPage();
+    pagePage.deployPageOptions();
+    pagePage.setPublishHour(hour);
+
+    // Then
+    pagePage.checkElementExists('Must be in format: "15:00"');
+  });
+
+  // Escenario aleatorio
   it("Add Facebook card title 299 chars long", () => {
     // Given
     const randomTitle = faker.string.alphanumeric(299);
@@ -384,7 +398,7 @@ describe("Pages feature", () => {
   });
 
   // Escenario aleatorio
-  it("Add X card title 300 chars long", () => {
+  it("Add X card title 301 chars long", () => {
     // Given
     const randomTitle = faker.string.alphanumeric(301);
     const pagePage = dashboardPage.goToPages();
@@ -509,5 +523,19 @@ describe("Pages feature", () => {
       // Then
       pagePage.checkElementDontExist(goodUrl.notExpected);
     });
+  });
+
+  // A-priory tests
+  it("Set publish date to date that has already passed", () => {
+    // Given
+    const oldDate = '1900-01-01';
+    const pagePage = dashboardPage.goToPages();
+    // When
+    pagePage.gotoCreateNewPage();
+    pagePage.deployPageOptions();
+    pagePage.setPublishDate(oldDate);
+
+    // Then
+    pagePage.checkElementExists("Invalid date, you should select a future date");
   });
 });

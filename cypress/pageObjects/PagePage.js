@@ -114,9 +114,14 @@ export class PagePage {
     cy.get('[title="Settings"]').click()
   }
 
-  setPublishDate(hour) {
-    cy.get("[data-test-date-time-picker-date-input]").type(hour);
+  setPublishDate(date) {
+    cy.get("[data-test-date-time-picker-date-input]").type(date);
     cy.get("[data-test-date-time-picker-date-input]").blur()
+  }
+
+  setPublishHour(hour) {
+    cy.get("[data-test-date-time-picker-time-input]").type(hour);
+    cy.get("[data-test-date-time-picker-time-input]").blur()
   }
 
   addUri(uri) {
