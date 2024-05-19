@@ -29,6 +29,22 @@ npm install
 
 ## Ejecución
 
+### Semana 7(*):
+Para ejecutar las pruebas con estrategias de generación de datos en conjunto:
+```bash
+npm run test:cypress
+```
+
+O hacerlo de manera individual:
+```bash
+cypress run --spec "cypress/e2e/10Escenarios-a-piori.cy.js"
+cypress run --spec "cypress/e2e/10Escenarios-aleatorios.cy.js"
+cypress run --spec "cypress/e2e/10Escenarios-pseudoAleatorio.cy.js"
+cypress run --spec "cypress/e2e/pages.cy.js"
+cypress run --spec "cypress/e2e/posts.cy.js"
+```
+---
+
 ### Tests de Cypress:
 ```bash
 npm run test:cypress
