@@ -1,0 +1,5 @@
+{
+  "emoji": "🦊",
+  "htmlInjection": "<p>hola</p>",
+  "sqlInjection": "SELECT * FROM  WHERE 1 = 1"
+}

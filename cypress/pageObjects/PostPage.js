@@ -64,7 +64,7 @@ export class PostPage {
     cy.get('.gh-editor-title').clear()
   }
 
-  startNewPost(title, content) {
+  startNewPost(title = '', content = '') {
     cy.get("[data-test-nav='new-story']").click()
     cy.contains('New').should('be.visible')
     this.typeTitle(title)
@@ -76,12 +76,17 @@ export class PostPage {
     cy.get('body').then(($body) => {
       if ($body.find('button.gh-publish-trigger:visible').length) {
         cy.get('button.gh-publish-trigger:visible').click();
-        cy.get("[data-test-button='continue']").click();
-        cy.get("[data-test-button='confirm-publish']").click();
-        cy.contains('Boom. It’s out there.').should('be.visible');
-        Cypress.env('publishButtonFound', true);
+        if (title.length > 255) {
+          cy.contains('Validation failed: Title cannot be longer than 255 characters.').should('be.visible');
+          Cypress.env('ABLE_TO_SAVE', false);
+        } else {
+          cy.get("[data-test-button='continue']").click();
+          cy.get("[data-test-button='confirm-publish']").click();
+          cy.contains('Boom. It’s out there.').should('be.visible');
+          Cypress.env('ABLE_TO_SAVE', true);
+        }
       } else {
-        Cypress.env('publishButtonFound', false);
+        Cypress.env('ABLE_TO_SAVE', false);
       }
     });
     return cy.url();
