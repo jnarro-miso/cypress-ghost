@@ -1,0 +1,62 @@
+{
+  "empty": {
+    "title": "",
+    "content": ""
+  },
+  "onlyTitle": {
+    "title": "Solo título",
+    "content": ""
+  },
+  "onlyContent": {
+    "title": "",
+    "content": "Solo contenido"
+  },
+  "titleAndContent": {
+    "title": "Título y contenido",
+    "content": "Y contenido"
+  },
+  "longTitle": {
+    "title": "Post con título muy largo para probar el límite de caracteres permitidos por Ghost",
+    "content": "Contenido"
+  },
+  "withNumbers": {
+    "title": "1234567890",
+    "content": "Contenido"
+  },
+  "specialCharacters": {
+    "title": "Post con caracteres especiales !@#$%^&*()",
+    "content": "Contenido"
+  },
+  "htmlInjection": {
+    "title": "Post con HTML inyectado <script>alert('Test');</script>",
+    "content": "Verificar si la aplicación escapa HTML correctamente."
+  },
+  "sqlInjection": {
+    "title": "Post con inyección SQL ' OR '1'='1",
+    "content": "Intento de inyección SQL para probar la seguridad."
+  },
+  "multipleParagraphs": {
+    "title": "Post con múltiples párrafos",
+    "content": "Primer párrafo.\n\nSegundo párrafo.\n\nTercer párrafo."
+  },
+  "markdown": {
+    "title": "Post con markdown",
+    "content": "# Encabezado\n\n* Elemento de lista 1\n* Elemento de lista 2\n\n[Enlace](http://example.com)"
+  },
+  "emojisInTitle": {
+    "title": "Post con emojis 🦊 en título",
+    "content": "Contenido"
+  },
+  "emojisInContent": {
+    "title": "Post con emojis en el contenido",
+    "content": "Contenido con emojis 🦊"
+  },
+  "emojisInTitleAndContent": {
+    "title": "Post con emojis 🦊 en título y contenido",
+    "content": "Contenido con emojis 🦊"
+  },
+  "longContent": {
+    "title": "Post con contenido muy largo",
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut morbi tincidunt augue interdum velit euismod in pellentesque massa. Faucibus vitae aliquet nec ullamcorper sit amet risus. Maecenas volutpat blandit aliquam etiam erat. Egestas integer eget aliquet nibh praesent tristique magna sit amet. In aliquam sem fringilla ut morbi. Hendrerit dolor magna eget est lorem. Libero id faucibus nisl tincidunt. Imperdiet proin fermentum leo vel orci porta non. Lacus viverra vitae congue eu consequat ac felis. Justo laoreet sit amet cursus sit amet.Lorem ipsum dolor sit amet consectetur adipiscing. Amet mauris commodo quis imperdiet massa tincidunt nunc. Aliquet risus feugiat in ante metus dictum. Elementum facilisis leo vel fringilla est ullamcorper eget. Enim diam vulputate ut pharetra sit amet aliquam. Ac orci phasellus egestas tellus rutrum tellus pellentesque eu. Natoque penatibus et magnis dis parturient montes nascetur. Nunc non blandit massa enim nec dui nunc. Sit amet est placerat in egestas erat imperdiet sed. Aenean pharetra magna ac placerat vestibulum. Volutpat sed cras ornare arcu dui. Eleifend quam adipiscing vitae proin sagittis. Molestie at elementum eu facilisis sed odio morbi quis.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut morbi tincidunt augue interdum velit euismod in pellentesque massa. Faucibus vitae aliquet nec ullamcorper sit amet risus. Maecenas volutpat blandit aliquam etiam erat. Egestas integer eget aliquet nibh praesent tristique magna sit amet. In aliquam sem fringilla ut morbi. Hendrerit dolor magna eget est lorem. Libero id faucibus nisl tincidunt. Imperdiet proin fermentum leo vel orci porta non. Lacus viverra vitae congue eu consequat ac felis. Justo laoreet sit amet cursus sit amet.Lorem ipsum dolor sit amet consectetur adipiscing. Amet mauris commodo quis imperdiet massa tincidunt nunc. Aliquet risus feugiat in ante metus dictum. Elementum facilisis leo vel fringilla est ullamcorper eget. Enim diam vulputate ut pharetra sit amet aliquam. Ac orci phasellus egestas tellus rutrum tellus pellentesque eu. Natoque penatibus et magnis dis parturient montes nascetur. Nunc non blandit massa enim nec dui nunc. Sit amet est placerat in egestas erat imperdiet sed. Aenean pharetra magna ac placerat vestibulum. Volutpat sed cras ornare arcu dui. Eleifend quam adipiscing vitae proin sagittis. Molestie at elementum eu facilisis sed odio morbi quis.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut morbi tincidunt augue interdum velit euismod in pellentesque massa. Faucibus vitae aliquet nec ullamcorper sit amet risus. Maecenas volutpat blandit aliquam etiam erat. Egestas integer eget aliquet nibh praesent tristique magna sit amet. In aliquam sem fringilla ut morbi. Hendrerit dolor magna eget est lorem."
+  }
+}

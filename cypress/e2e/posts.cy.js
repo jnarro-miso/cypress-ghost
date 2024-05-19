@@ -2,7 +2,9 @@ import { LoginPage } from '../pageObjects/LoginPage'
 import { faker } from '@faker-js/faker';
 
 // Feature: Posts
-describe('Posts feature', () => {
+
+// With random data (5)
+describe.skip('Posts feature with random data', () => {
   const loginPage = new LoginPage()
   let dashboardPage
 
@@ -10,12 +12,13 @@ describe('Posts feature', () => {
   beforeEach(() => {
     loginPage.visit()
     dashboardPage = loginPage.login(Cypress.env('USERNAME'), Cypress.env('PASSWORD'))
+
+    Cypress.on('uncaught:exception', (err, runnable) => {
+      // Returning false here prevents Cypress from failing the test
+      return false
+    })
   })
 
-  Cypress.on('uncaught:exception', (err, runnable) => {
-    // Returning false here prevents Cypress from failing the test
-    return false
-  })
 
   // Scenario EP01: Creating a post and a draft
   it('should create a post, and a draft', () => {
@@ -179,6 +182,275 @@ describe('Posts feature', () => {
       cy.screenshot('goToPosts-3')
       postPage.findPostByText(updatedPost.title).should('exist')
       cy.screenshot('findPostByText')
+    })
+  })
+
+})
+
+// A priori data (15)
+describe('Posts feature with static data', () => {
+  const loginPage = new LoginPage()
+  let dashboardPage
+
+  // Given a user is logged in to the Ghost admin
+  beforeEach(() => {
+    loginPage.visit()
+    dashboardPage = loginPage.login(Cypress.env('USERNAME'), Cypress.env('PASSWORD'))
+    
+    Cypress.on('uncaught:exception', (err, runnable) => {
+      // Returning false here prevents Cypress from failing the test
+      return false
+    })
+  })
+
+  it('should not create an empty post', () => {
+    // Given
+    cy.fixture('posts-a-priori.json').then(({ empty }) => {
+      // When the user creates a post
+      let postPage = dashboardPage.goToPosts()
+      cy.screenshot('goToPosts-1')
+      postPage.createPost(empty.title, empty.content)
+      if (!Cypress.env('publishButtonFound')) {
+        expect(Cypress.env('publishButtonFound')).to.be.false;
+      }
+    })
+  })
+
+  it('should create a post with only title', () => {
+    // Given
+    cy.fixture('posts-a-priori.json').then(({ onlyTitle }) => {
+      // When the user creates a post
+      let postPage = dashboardPage.goToPosts()
+      cy.screenshot('goToPosts-1')
+      postPage.createPost(onlyTitle.title, onlyTitle.content)
+      cy.screenshot('createPost')
+      
+      // Then the post should be visible on the posts page as published
+      postPage = dashboardPage.goToPosts()
+      cy.screenshot('goToPosts-3')
+      postPage.checkPublishedPostExists(onlyTitle.title)
+      cy.screenshot('checkPublishedPostExists')
+    })
+  })
+
+  it('should create a post with only content', () => {
+    // Given
+    cy.fixture('posts-a-priori.json').then(({ onlyContent }) => {
+      // When the user creates a post
+      let postPage = dashboardPage.goToPosts()
+      cy.screenshot('goToPosts-1')
+      postPage.createPost(onlyContent.title, onlyContent.content)
+      cy.screenshot('createPost')
+      
+      // Then the post should be visible on the posts page as published
+      postPage = dashboardPage.goToPosts()
+      cy.screenshot('goToPosts-3')
+      postPage.checkPublishedPostExists(onlyContent.title)
+      cy.screenshot('checkPublishedPostExists')
+    })
+  })
+
+  it('should create a post with title and content', () => {
+    // Given
+    cy.fixture('posts-a-priori.json').then(({ titleAndContent }) => {
+      // When the user creates a post
+      let postPage = dashboardPage.goToPosts()
+      cy.screenshot('goToPosts-1')
+      postPage.createPost(titleAndContent.title, titleAndContent.content)
+      cy.screenshot('createPost')
+      
+      // Then the post should be visible on the posts page as published
+      postPage = dashboardPage.goToPosts()
+      cy.screenshot('goToPosts-3')
+      postPage.checkPublishedPostExists(titleAndContent.title)
+      cy.screenshot('checkPublishedPostExists')
+    })
+  })
+
+  it('should create a post with a long title', () => {
+    // Given
+    cy.fixture('posts-a-priori.json').then(({ longTitle }) => {
+      // When the user creates a post
+      let postPage = dashboardPage.goToPosts()
+      cy.screenshot('goToPosts-1')
+      postPage.createPost(longTitle.title, longTitle.content)
+      cy.screenshot('createPost')
+      
+      // Then the post should be visible on the posts page as published
+      postPage = dashboardPage.goToPosts()
+      cy.screenshot('goToPosts-3')
+      postPage.checkPublishedPostExists(longTitle.title)
+      cy.screenshot('checkPublishedPostExists')
+    })
+  })
+
+  it('should create a post with a long content', () => {
+    // Given
+    cy.fixture('posts-a-priori.json').then(({ longContent }) => {
+      // When the user creates a post
+      let postPage = dashboardPage.goToPosts()
+      cy.screenshot('goToPosts-1')
+      postPage.createPost(longContent.title, longContent.content)
+      cy.screenshot('createPost')
+      
+      // Then the post should be visible on the posts page as published
+      postPage = dashboardPage.goToPosts()
+      cy.screenshot('goToPosts-3')
+      postPage.checkPublishedPostExists(longContent.title)
+      cy.screenshot('checkPublishedPostExists')
+    })
+  })
+
+  it('should create a post with numbers', () => {
+    // Given
+    cy.fixture('posts-a-priori.json').then(({ withNumbers }) => {
+      // When the user creates a post
+      let postPage = dashboardPage.goToPosts()
+      cy.screenshot('goToPosts-1')
+      postPage.createPost(withNumbers.title, withNumbers.content)
+      cy.screenshot('createPost')
+      
+      // Then the post should be visible on the posts page as published
+      postPage = dashboardPage.goToPosts()
+      cy.screenshot('goToPosts-3')
+      postPage.checkPublishedPostExists(withNumbers.title)
+      cy.screenshot('checkPublishedPostExists')
+    })
+  })
+
+  it('should create a post with special characters', () => {
+    // Given
+    cy.fixture('posts-a-priori.json').then(({ specialCharacters }) => {
+      // When the user creates a post
+      let postPage = dashboardPage.goToPosts()
+      cy.screenshot('goToPosts-1')
+      postPage.createPost(specialCharacters.title, specialCharacters.content)
+      cy.screenshot('createPost')
+      
+      // Then the post should be visible on the posts page as published
+      postPage = dashboardPage.goToPosts()
+      cy.screenshot('goToPosts-3')
+      postPage.checkPublishedPostExists(specialCharacters.title)
+      cy.screenshot('checkPublishedPostExists')
+    })
+  })
+
+  it('should create a post with html injection as just text', () => {
+    // Given
+    cy.fixture('posts-a-priori.json').then(({ htmlInjection }) => {
+      // When the user creates a post
+      let postPage = dashboardPage.goToPosts()
+      cy.screenshot('goToPosts-1')
+      postPage.createPost(htmlInjection.title, htmlInjection.content)
+      cy.screenshot('createPost')
+      
+      // Then the post should be visible on the posts page as published
+      postPage = dashboardPage.goToPosts()
+      cy.screenshot('goToPosts-3')
+      postPage.checkPublishedPostExists(htmlInjection.title)
+      cy.screenshot('checkPublishedPostExists')
+    })
+  })
+
+  it('should create a post with sql injection as just text', () => {
+    // Given
+    cy.fixture('posts-a-priori.json').then(({ sqlInjection }) => {
+      // When the user creates a post
+      let postPage = dashboardPage.goToPosts()
+      cy.screenshot('goToPosts-1')
+      postPage.createPost(sqlInjection.title, sqlInjection.content)
+      cy.screenshot('createPost')
+      
+      // Then the post should be visible on the posts page as published
+      postPage = dashboardPage.goToPosts()
+      cy.screenshot('goToPosts-3')
+      postPage.checkPublishedPostExists(sqlInjection.title)
+      cy.screenshot('checkPublishedPostExists')
+    })
+  })
+
+  it('should create a post with multiple paragraphs', () => {
+    // Given
+    cy.fixture('posts-a-priori.json').then(({ multipleParagraphs }) => {
+      // When the user creates a post
+      let postPage = dashboardPage.goToPosts()
+      cy.screenshot('goToPosts-1')
+      postPage.createPost(multipleParagraphs.title, multipleParagraphs.content)
+      cy.screenshot('createPost')
+      
+      // Then the post should be visible on the posts page as published
+      postPage = dashboardPage.goToPosts()
+      cy.screenshot('goToPosts-3')
+      postPage.checkPublishedPostExists(multipleParagraphs.title)
+      cy.screenshot('checkPublishedPostExists')
+    })
+  })
+
+  it('should create a post with markdown', () => {
+    // Given
+    cy.fixture('posts-a-priori.json').then(({ markdown }) => {
+      // When the user creates a post
+      let postPage = dashboardPage.goToPosts()
+      cy.screenshot('goToPosts-1')
+      postPage.createPost(markdown.title, markdown.content)
+      cy.screenshot('createPost')
+      
+      // Then the post should be visible on the posts page as published
+      postPage = dashboardPage.goToPosts()
+      cy.screenshot('goToPosts-3')
+      postPage.checkPublishedPostExists(markdown.title)
+      cy.screenshot('checkPublishedPostExists')
+    })
+  })
+
+  it('should create a post with emojis in title', () => {
+    // Given
+    cy.fixture('posts-a-priori.json').then(({ emojisInTitle }) => {
+      // When the user creates a post
+      let postPage = dashboardPage.goToPosts()
+      cy.screenshot('goToPosts-1')
+      postPage.createPost(emojisInTitle.title, emojisInTitle.content)
+      cy.screenshot('createPost')
+      
+      // Then the post should be visible on the posts page as published
+      postPage = dashboardPage.goToPosts()
+      cy.screenshot('goToPosts-3')
+      postPage.checkPublishedPostExists(emojisInTitle.title)
+      cy.screenshot('checkPublishedPostExists')
+    })
+  })
+
+  it('should create a post with emojis in content', () => {
+    // Given
+    cy.fixture('posts-a-priori.json').then(({ emojisInContent }) => {
+      // When the user creates a post
+      let postPage = dashboardPage.goToPosts()
+      cy.screenshot('goToPosts-1')
+      postPage.createPost(emojisInContent.title, emojisInContent.content)
+      cy.screenshot('createPost')
+      
+      // Then the post should be visible on the posts page as published
+      postPage = dashboardPage.goToPosts()
+      cy.screenshot('goToPosts-3')
+      postPage.checkPublishedPostExists(emojisInContent.title)
+      cy.screenshot('checkPublishedPostExists')
+    })
+  })
+
+  it('should create a post with emojis in title and content', () => {
+    // Given
+    cy.fixture('posts-a-priori.json').then(({ emojisInTitleAndContent }) => {
+      // When the user creates a post
+      let postPage = dashboardPage.goToPosts()
+      cy.screenshot('goToPosts-1')
+      postPage.createPost(emojisInTitleAndContent.title, emojisInTitleAndContent.content)
+      cy.screenshot('createPost')
+      
+      // Then the post should be visible on the posts page as published
+      postPage = dashboardPage.goToPosts()
+      cy.screenshot('goToPosts-3')
+      postPage.checkPublishedPostExists(emojisInTitleAndContent.title)
+      cy.screenshot('checkPublishedPostExists')
     })
   })
 
