@@ -2,7 +2,9 @@ import { LoginPage } from '../pageObjects/LoginPage'
 import { faker } from '@faker-js/faker';
 
 // Feature: Posts
-describe('Posts feature', () => {
+
+// With random data (5)
+describe('Posts feature with random data', () => {
   const loginPage = new LoginPage()
   let dashboardPage
 
@@ -10,11 +12,11 @@ describe('Posts feature', () => {
   beforeEach(() => {
     loginPage.visit()
     dashboardPage = loginPage.login(Cypress.env('USERNAME'), Cypress.env('PASSWORD'))
-  })
 
-  Cypress.on('uncaught:exception', (err, runnable) => {
-    // Returning false here prevents Cypress from failing the test
-    return false
+    Cypress.on('uncaught:exception', (err, runnable) => {
+      // Returning false here prevents Cypress from failing the test
+      return false
+    })
   })
 
   // Scenario EP01: Creating a post and a draft
@@ -179,6 +181,365 @@ describe('Posts feature', () => {
       cy.screenshot('goToPosts-3')
       postPage.findPostByText(updatedPost.title).should('exist')
       cy.screenshot('findPostByText')
+    })
+  })
+
+})
+
+// With pseudo-random data (7)
+describe('Posts feature with pseudo-random data', () => {
+  const loginPage = new LoginPage()
+  let dashboardPage
+
+  // Given a user is logged in to the Ghost admin
+  beforeEach(() => {
+    loginPage.visit()
+    dashboardPage = loginPage.login(Cypress.env('USERNAME'), Cypress.env('PASSWORD'))
+    
+    Cypress.on('uncaught:exception', (err, runnable) => {
+      // Returning false here prevents Cypress from failing the test
+      return false
+    })
+  })
+
+  it('should create a post title with 255 chars', () => {
+    const postTitle = faker.string.alphanumeric(255);
+    
+    // When the user creates a post
+    let postPage = dashboardPage.goToPosts()
+    postPage.createPost(postTitle)
+    
+    // Then the post should be visible on the posts page as published
+    postPage = dashboardPage.goToPosts()
+    postPage.checkPublishedPostExists(postTitle)
+  })
+
+  it('should not create a post title with 256 chars', () => {
+    const postTitle = faker.string.alphanumeric(256);
+    
+    // When the user creates a post
+    let postPage = dashboardPage.goToPosts()
+    postPage.createPost(postTitle)
+    if (!Cypress.env('ABLE_TO_SAVE')) {
+      expect(Cypress.env('ABLE_TO_SAVE')).to.be.false;
+    }
+  })
+
+  it('should create a post content with 1000 chars', () => {
+    const newPost = { title: faker.lorem.words(), content: faker.string.alphanumeric(1000) }
+    
+    // When the user creates a post
+    let postPage = dashboardPage.goToPosts()
+    postPage.createPost(newPost.title, newPost.content)
+    
+    // Then the post should be visible on the posts page as published
+    postPage = dashboardPage.goToPosts()
+    postPage.checkPublishedPostExists(newPost.title)
+  })
+
+  it('should create a post content with 5000 chars', () => {
+    const newPost = { title: faker.lorem.words(), content: faker.string.alphanumeric(5000) }
+    
+    // When the user creates a post
+    let postPage = dashboardPage.goToPosts()
+    postPage.createPost(newPost.title, newPost.content)
+    
+    // Then the post should be visible on the posts page as published
+    postPage = dashboardPage.goToPosts()
+    postPage.checkPublishedPostExists(newPost.title)
+  })
+
+  it('should create a post content with 10000 chars', () => {
+    const newPost = { title: faker.lorem.words(), content: faker.string.alphanumeric(10000) }
+    
+    // When the user creates a post
+    let postPage = dashboardPage.goToPosts()
+    postPage.createPost(newPost.title, newPost.content)
+    
+    // Then the post should be visible on the posts page as published
+    postPage = dashboardPage.goToPosts()
+    postPage.checkPublishedPostExists(newPost.title)
+  })
+
+  it('should create a tag with 191 chars, and add tag to a post', () => {
+    const newPost = { title: faker.lorem.words(), content: faker.lorem.paragraph() }
+    const newTag = faker.string.alphanumeric(191);
+    
+    // When the user creates a tag
+    let tagsPage = dashboardPage.goToTags()
+    tagsPage.createTag(newTag)
+    // And creates a post
+    const postPage = dashboardPage.goToPosts()
+    postPage.createPost(newPost.title, newPost.content)
+    // And adds the tag to the post
+    postPage.goToEditor()
+    postPage.toggleSettings()
+    postPage.selectTag(newTag)
+    
+    // Then the tag should have one post
+    tagsPage = dashboardPage.goToTags()
+    cy.visit(Cypress.env('GHOST_SITE_URL') + '/tag/' + newTag)
+    cy.contains(newPost.title).should('exist')
+  })
+
+  it('should not create a tag with 192 chars', () => {
+    const newTag = faker.string.alphanumeric(192);
+    
+    // When the user creates a tag
+    let tagsPage = dashboardPage.goToTags()
+    tagsPage.createTag(newTag)
+    if (!Cypress.env('ABLE_TO_SAVE')) {
+      expect(Cypress.env('ABLE_TO_SAVE')).to.be.false;
+    }
+  })
+})
+
+// With a priori data (18)
+describe('Posts feature with static data', () => {
+  const loginPage = new LoginPage()
+  let dashboardPage
+
+  // Given a user is logged in to the Ghost admin
+  beforeEach(() => {
+    loginPage.visit()
+    dashboardPage = loginPage.login(Cypress.env('USERNAME'), Cypress.env('PASSWORD'))
+    
+    Cypress.on('uncaught:exception', (err, runnable) => {
+      // Returning false here prevents Cypress from failing the test
+      return false
+    })
+  })
+
+  it('should not create an empty post', () => {
+    // Given
+    cy.fixture('posts-a-priori.json').then(({ empty }) => {
+      // When the user creates a post
+      let postPage = dashboardPage.goToPosts()
+      postPage.createPost(empty.title, empty.content)
+      // Then the publish button should not be visible
+      if (!Cypress.env('ABLE_TO_SAVE')) {
+        expect(Cypress.env('ABLE_TO_SAVE')).to.be.false;
+      }
+    })
+  })
+
+  it('should not be able to publish if type and then clear', () => {
+    // Given
+    cy.fixture('posts-a-priori.json').then(({ onlyTitle }) => {
+      // When the user creates a post
+      let postPage = dashboardPage.goToPosts()
+      postPage.startNewPost(onlyTitle.title)
+      cy.get('.gh-editor-title').clear()
+      // Then the publish button should not be visible
+      cy.get('button.gh-publish-trigger:visible').should('not.exist');
+    })
+  })
+
+  it('should create a post with only title', () => {
+    // Given
+    cy.fixture('posts-a-priori.json').then(({ onlyTitle }) => {
+      // When the user creates a post
+      let postPage = dashboardPage.goToPosts()
+      postPage.createPost(onlyTitle.title, onlyTitle.content)
+      
+      // Then the post should be visible on the posts page as published
+      postPage = dashboardPage.goToPosts()
+      postPage.checkPublishedPostExists(onlyTitle.title)
+    })
+  })
+
+  it('should create a post with only content', () => {
+    // Given
+    cy.fixture('posts-a-priori.json').then(({ onlyContent }) => {
+      // When the user creates a post
+      let postPage = dashboardPage.goToPosts()
+      postPage.createPost(onlyContent.title, onlyContent.content)
+      
+      // Then the post should be visible on the posts page as published
+      postPage = dashboardPage.goToPosts()
+      postPage.checkPublishedPostExists(onlyContent.title)
+    })
+  })
+
+  it('should create a post with title and content', () => {
+    // Given
+    cy.fixture('posts-a-priori.json').then(({ titleAndContent }) => {
+      // When the user creates a post
+      let postPage = dashboardPage.goToPosts()
+      postPage.createPost(titleAndContent.title, titleAndContent.content)
+      
+      // Then the post should be visible on the posts page as published
+      postPage = dashboardPage.goToPosts()
+      postPage.checkPublishedPostExists(titleAndContent.title)
+    })
+  })
+
+  it('should create a post with a long title', () => {
+    // Given
+    cy.fixture('posts-a-priori.json').then(({ longTitle }) => {
+      // When the user creates a post
+      let postPage = dashboardPage.goToPosts()
+      postPage.createPost(longTitle.title, longTitle.content)
+      
+      // Then the post should be visible on the posts page as published
+      postPage = dashboardPage.goToPosts()
+      postPage.checkPublishedPostExists(longTitle.title)
+    })
+  })
+
+  it('should create a post with numbers', () => {
+    // Given
+    cy.fixture('posts-a-priori.json').then(({ withNumbers }) => {
+      // When the user creates a post
+      let postPage = dashboardPage.goToPosts()
+      postPage.createPost(withNumbers.title, withNumbers.content)
+      
+      // Then the post should be visible on the posts page as published
+      postPage = dashboardPage.goToPosts()
+      postPage.checkPublishedPostExists(withNumbers.title)
+    })
+  })
+
+  it('should create a post with special characters', () => {
+    // Given
+    cy.fixture('posts-a-priori.json').then(({ specialCharacters }) => {
+      // When the user creates a post
+      let postPage = dashboardPage.goToPosts()
+      postPage.createPost(specialCharacters.title, specialCharacters.content)
+      
+      // Then the post should be visible on the posts page as published
+      postPage = dashboardPage.goToPosts()
+      postPage.checkPublishedPostExists(specialCharacters.title)
+    })
+  })
+
+  it('should create a post with html injection as just text', () => {
+    // Given
+    cy.fixture('posts-a-priori.json').then(({ htmlInjection }) => {
+      // When the user creates a post
+      let postPage = dashboardPage.goToPosts()
+      postPage.createPost(htmlInjection.title, htmlInjection.content)
+      
+      // Then the post should be visible on the posts page as published
+      postPage = dashboardPage.goToPosts()
+      postPage.checkPublishedPostExists(htmlInjection.title)
+    })
+  })
+
+  it('should create a post with sql injection as just text', () => {
+    // Given
+    cy.fixture('posts-a-priori.json').then(({ sqlInjection }) => {
+      // When the user creates a post
+      let postPage = dashboardPage.goToPosts()
+      postPage.createPost(sqlInjection.title, sqlInjection.content)
+      
+      // Then the post should be visible on the posts page as published
+      postPage = dashboardPage.goToPosts()
+      postPage.checkPublishedPostExists(sqlInjection.title)
+    })
+  })
+
+  it('should create a post with multiple paragraphs', () => {
+    // Given
+    cy.fixture('posts-a-priori.json').then(({ multipleParagraphs }) => {
+      // When the user creates a post
+      let postPage = dashboardPage.goToPosts()
+      postPage.createPost(multipleParagraphs.title, multipleParagraphs.content)
+      
+      // Then the post should be visible on the posts page as published
+      postPage = dashboardPage.goToPosts()
+      postPage.checkPublishedPostExists(multipleParagraphs.title)
+    })
+  })
+
+  it('should create a post with markdown', () => {
+    // Given
+    cy.fixture('posts-a-priori.json').then(({ markdown }) => {
+      // When the user creates a post
+      let postPage = dashboardPage.goToPosts()
+      postPage.createPost(markdown.title, markdown.content)
+      
+      // Then the post should be visible on the posts page as published
+      postPage = dashboardPage.goToPosts()
+      postPage.checkPublishedPostExists(markdown.title)
+    })
+  })
+
+  it('should create a post with emojis in title', () => {
+    // Given
+    cy.fixture('posts-a-priori.json').then(({ emojisInTitle }) => {
+      // When the user creates a post
+      let postPage = dashboardPage.goToPosts()
+      postPage.createPost(emojisInTitle.title, emojisInTitle.content)
+      
+      // Then the post should be visible on the posts page as published
+      postPage = dashboardPage.goToPosts()
+      postPage.checkPublishedPostExists(emojisInTitle.title)
+    })
+  })
+
+  it('should create a post with emojis in content', () => {
+    // Given
+    cy.fixture('posts-a-priori.json').then(({ emojisInContent }) => {
+      // When the user creates a post
+      let postPage = dashboardPage.goToPosts()
+      postPage.createPost(emojisInContent.title, emojisInContent.content)
+      
+      // Then the post should be visible on the posts page as published
+      postPage = dashboardPage.goToPosts()
+      postPage.checkPublishedPostExists(emojisInContent.title)
+    })
+  })
+
+  it('should create a post with emojis in title and content', () => {
+    // Given
+    cy.fixture('posts-a-priori.json').then(({ emojisInTitleAndContent }) => {
+      // When the user creates a post
+      let postPage = dashboardPage.goToPosts()
+      postPage.createPost(emojisInTitleAndContent.title, emojisInTitleAndContent.content)
+      
+      // Then the post should be visible on the posts page as published
+      postPage = dashboardPage.goToPosts()
+      postPage.checkPublishedPostExists(emojisInTitleAndContent.title)
+    })
+  })
+
+  it('should not create a tag with emoji', () => {
+    // Given
+    cy.fixture('tags-a-priori.json').then(({ emoji }) => {
+      // When the user creates a tag
+      let tagsPage = dashboardPage.goToTags()
+      tagsPage.createTag(emoji)
+      // Then the tag should not be visible on the tags page
+      if (Cypress.env('ABLE_TO_SAVE')) {
+        expect(Cypress.env('ABLE_TO_SAVE')).to.be.false;
+      }
+    })
+  })
+
+  it('should not create a tag with html injection', () => {
+    // Given
+    cy.fixture('tags-a-priori.json').then(({ htmlInjection }) => {
+      // When the user creates a tag
+      let tagsPage = dashboardPage.goToTags()
+      tagsPage.createTag(htmlInjection)
+      // Then the tag should not be visible on the tags page
+      if (Cypress.env('ABLE_TO_SAVE')) {
+        expect(Cypress.env('ABLE_TO_SAVE')).to.be.false;
+      }
+    })
+  })
+
+  it('should not create a tag with sql injection', () => {
+    // Given
+    cy.fixture('tags-a-priori.json').then(({ sqlInjection }) => {
+      // When the user creates a tag
+      let tagsPage = dashboardPage.goToTags()
+      tagsPage.createTag(sqlInjection)
+      // Then the tag should not be visible on the tags page
+      if (Cypress.env('ABLE_TO_SAVE')) {
+        expect(Cypress.env('ABLE_TO_SAVE')).to.be.false;
+      }
     })
   })
 

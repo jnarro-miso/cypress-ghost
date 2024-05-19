@@ -15,8 +15,13 @@ export class PostPage {
   }
 
   findPostByText(text) {
-    this.sortByRecentlyUpdated()
-    return cy.get('.gh-posts-list-item-group').filter(`:contains('${text}')`)
+    this.sortByRecentlyUpdated();
+    return cy.get('.gh-posts-list-item-group').then($elements => {
+      const filteredElements = $elements.filter((index, element) => {
+        return element.textContent.includes(text);
+      });
+      return cy.wrap(filteredElements);
+    });
   }
 
   getInputValue(selector) {
@@ -24,7 +29,7 @@ export class PostPage {
   }
 
   checkPublishedPostExists(title) {
-    this.findPostByText(title).then(($post) => {
+    this.findPostByText(title).first().then(($post) => {
       cy.wrap($post).within(() => {
         cy.get('span.published').should('exist')
       });
@@ -32,7 +37,7 @@ export class PostPage {
   }
 
   checkDraftPostExists(text) {
-    return this.findPostByText(text).then(($draft) => {
+    return this.findPostByText(text).first().then(($draft) => {
       cy.wrap($draft).within(() => {
         cy.get('span.draft').should('exist')
       })
@@ -40,27 +45,51 @@ export class PostPage {
   }
 
   typeTitle(title) {
-    cy.get('.gh-editor-title').type(title)
+    if (title !== '') {
+      cy.get('.gh-editor-title').type(title)
+    } else {
+      cy.get('.gh-editor-title').clear()
+    }
+  }
+
+  typeContent(content) {
+    if (content !== '') {
+      cy.get('p[data-koenig-dnd-droppable]').type(content)
+    } else {
+      cy.get('p[data-koenig-dnd-droppable]').clear()
+    }
   }
 
   clearTitle() {
     cy.get('.gh-editor-title').clear()
   }
 
-  startNewPost(title, content) {
+  startNewPost(title = '', content = '') {
     cy.get("[data-test-nav='new-story']").click()
     cy.contains('New').should('be.visible')
     this.typeTitle(title)
-    cy.get('p[data-koenig-dnd-droppable]').type(content)
+    this.typeContent(content)
   }
 
   createPost(title = 'My post title', content = 'My post content') {
-    this.startNewPost(title, content)
-    cy.get('button.gh-publish-trigger:visible').click()
-    cy.get("[data-test-button='continue']").click()
-    cy.get("[data-test-button='confirm-publish']").click()
-    cy.contains('Boom. It’s out there.').should('be.visible')
-    return cy.url()
+    this.startNewPost(title, content);
+    cy.get('body').then(($body) => {
+      if ($body.find('button.gh-publish-trigger:visible').length) {
+        cy.get('button.gh-publish-trigger:visible').click();
+        if (title.length > 255) {
+          cy.contains('Validation failed: Title cannot be longer than 255 characters.').should('be.visible');
+          Cypress.env('ABLE_TO_SAVE', false);
+        } else {
+          cy.get("[data-test-button='continue']").click();
+          cy.get("[data-test-button='confirm-publish']").click();
+          cy.contains('Boom. It’s out there.').should('be.visible');
+          Cypress.env('ABLE_TO_SAVE', true);
+        }
+      } else {
+        Cypress.env('ABLE_TO_SAVE', false);
+      }
+    });
+    return cy.url();
   }
 
   createPostOld(title = 'My post title', content = 'My post content') {
